@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans>
-     <!-- Remove this if your database setting is fine.
+     <!-- Remove this if your database setting is fine. -->
      <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
          <property name="driverClassName" value="${jdbc.driverClassName}"/>
          <property name="url" value="${jdbc.url}"/>
          <property name="username" value="${jdbc.username}"/>
          <property name="password" value="${jdbc.password}"/>
     </bean>
-     -->
 
-         <!-- Transaction manager for a single JDBC DataSource
+
+     <!-- Transaction manager for a single JDBC DataSource -->
      <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
          <property name="dataSource" ref="dataSource"/>
      </bean>
-     -->
 
-         <!--
+
+     <!--
      <bean id="attributeManager" class="com.ideawu.core.AttributeManager">
          <property name="dataSource" ref="dataSource"/>
      </bean>
-     -->
+      -->
 
 </beans>
