@@ -1,11 +1,14 @@
 package cwserver.com.cloudwave.nio;
 
+import cwserver.com.cloudwave.Server;
 /**
  * User: DolphinBoy
  * Date: 13-6-26
  * Time: 下午10:44
  * To change this template use File | Settings | File Templates.
  */
-public interface NIOServer {
+public abstract class NIOServer implements Server {
+
+
 
 }

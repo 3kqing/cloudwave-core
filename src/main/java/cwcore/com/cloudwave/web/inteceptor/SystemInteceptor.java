@@ -1,4 +1,4 @@
-package cwcore.com.cloudwave.inteceptor;
+package cwcore.com.cloudwave.web.inteceptor;
 
 /**
  * User: DolphinBoy

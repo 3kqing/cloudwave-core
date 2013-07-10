@@ -4,29 +4,87 @@
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <context:annotation-config/>
-    <context:component-scan base-package="com.cloudwave"/>
+    <context:annotation-config />
+
+    <context:component-scan base-package="cwapp.com.cloudwave.test" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" />
+    </context:component-scan>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <!-- <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/> -->
         <property name="prefix" value="/WEB-INF/pages/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
+
+    <!--自动注册-->
+    <mvc:annotation-driven />
+    <!--自动注册:自定义字符编码和JSON解析类-->
+    <!--
+    <mvc:annotation-driven>
+        <mvc:message-converters register-defaults="true">
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <constructor-arg value="UTF-8" />
+            </bean>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper">
+                    <bean class="org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean">
+                        <property name="failOnEmptyBeans" value="false" />
+                    </bean>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+    -->
+
+    <!-- 启用Spring MVC的注解功能，完成请求和注解POJO的映射 -->
+    <!--
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter" />
+    -->
+    <!--
+    <bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter" />
+    -->
+    <!--
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <ref bean="mappingJacksonHttpMessageConverter"/>
+            </list>
+        </property>
+    </bean>
+    <bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>application/json; charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+    -->
+
+    <!-- <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" /> -->
+    <!-- HandlerMapping -->
+    <!-- <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/> -->
+
+    <!-- HandlerAdapter -->
+    <!-- <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>  -->
+
+    <!-- <bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter" />  -->
+
     <bean name="/parameterizableView" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
         <property name="viewName" value="success"/>
     </bean>
     <!-- 参数化视图控制器，不进行功能处理（即静态视图） -->
     <bean name="/*.html" class="org.springframework.web.servlet.mvc.UrlFilenameViewController"/>
 
+
+
+
     <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver"/>
 
-    <!-- HandlerMapping -->
-    <!-- <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/> -->
-
-    <!-- HandlerAdapter -->
-    <!-- <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/> -->
 
     <!--
     <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
@@ -51,9 +109,15 @@
     </bean>
     -->
     <!-- 拦截器 -->
+    <!--
     <mvc:interceptors>
-        <bean class="cwcore.com.cloudwave.inteceptor.SystemInteceptor" />
+        <bean class="cwcore.com.cloudwave.web.inteceptor.SystemInteceptor" />
     </mvc:interceptors>
+    -->
+    <!--会导致org.springframework.web.servlet.handler.MappedInterceptor not found错误-->
+
+
+
 
     <!-- 对静态资源文件的访问  方案一 （二选一） -->
     <mvc:default-servlet-handler/>
@@ -63,5 +127,41 @@
     <mvc:resources mapping="/images/**" location="/images/" cache-period="31556926"/>
     <mvc:resources mapping="/js/**" location="/js/" cache-period="31556926"/>
     <mvc:resources mapping="/css/**" location="/css/" cache-period="31556926"/>
+    -->
+    <!-- 注册上传组件 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="UTF-8" />
+        <property name="maxUploadSize" value="5242880" />
+        <property name="uploadTempDir" value="upload/temp" />
+    </bean>
+
+    <!--
+    <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
+
+    <bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+        <property name="mediaTypes" >
+            <value>
+                json=application/json
+                xml=application/xml
+            </value>
+        </property>
+    </bean>
+    -->
+    <!--
+    <bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+        <property name="mediaTypes" >
+            <map>
+                告诉视图解析器，返回的类型为json格式
+                <entry key="json" value="application/json" />
+            </map>
+        </property>
+
+        <property name="defaultViews">
+            <list>
+                 ModelAndView里的数据变成JSON
+                <bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
+            </list>
+        </property>
+    </bean>
     -->
 </beans>

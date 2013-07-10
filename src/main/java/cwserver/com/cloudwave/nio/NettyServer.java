@@ -14,25 +14,14 @@ import java.util.concurrent.Executors;
  * Time: 下午10:45
  * To change this template use File | Settings | File Templates.
  */
-public class NettyServer implements NIOServer {
-    final static int port = 8080;
+public class NettyServer extends NIOServer {
+    public final static int port = 8080;
+    private ServerBootstrap bootstrap;
+    private Channel parentChannel;
+    private InetSocketAddress localAddress;
+    private MyChannelHandler channelHandler = new MyChannelHandler();
 
-    public static void main(String[] args) {
-        Server server = new Server();
-        server.config(port);
-        server.start();
-    }
-
-
-}
-
-class Server {
-    ServerBootstrap bootstrap;
-    Channel parentChannel;
-    InetSocketAddress localAddress;
-    MyChannelHandler channelHandler = new MyChannelHandler();
-
-    Server() {
+    public NettyServer() {
         bootstrap = new ServerBootstrap(new NioServerSocketChannelFactory(
                 Executors.newCachedThreadPool(), Executors
                 .newCachedThreadPool()));
@@ -80,5 +69,11 @@ class Server {
             Channel ch = e.getChannel();
             ch.write(e.getMessage());
         }
+    }
+
+    public static void main(String[] args) {
+        NettyServer server = new NettyServer();
+        server.config(port);
+        server.start();
     }
 }

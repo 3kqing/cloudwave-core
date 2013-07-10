@@ -1,32 +1,36 @@
-<web-app version="2.4"
-         xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
-	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
 
     <display-name>Spring MVC Application</display-name>
-
 
     <!--
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
             /WEB-INF/database.xml
-            /WEB-INF/applicationContext.xml
+            /WEB-INF/applicationContext-*.xml
         </param-value>
     </context-param>
     -->
+
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
     <filter>
-        <filter-name>encoding</filter-name>
+        <filter-name>CharacterEncodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
         <init-param>
             <param-name>encoding</param-name>
             <param-value>UTF-8</param-value>
         </init-param>
     </filter>
+    <filter-mapping>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
     <servlet>
         <servlet-name>mvc-dispatcher</servlet-name>
@@ -39,22 +43,6 @@
         -->
         <load-on-startup>1</load-on-startup>
     </servlet>
-
-    <!--
-       <servlet>
-        <servlet-name>context</servlet-name>
-        <servlet-class>
-            org.springframework.web.context.ContextLoaderServlet
-        </servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-
-    <context-param>
-        <param-value>contextConfigLocation</param-value>
-        <param-value>/WEB-INF/sampleBanking-services.xml</param-value>
-    </context-param>
-    -->
-
     <servlet-mapping>
         <servlet-name>mvc-dispatcher</servlet-name>
         <url-pattern>/</url-pattern>
