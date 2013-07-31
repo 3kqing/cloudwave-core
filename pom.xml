@@ -1,19 +1,26 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.cloudwave.core</groupId>
-    <artifactId>cloudwave-core</artifactId>
+    <groupId>com.cloudwave.cwfw</groupId>
+    <artifactId>cwfw-core</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>cloudwave-core</name>
+    <name>cwfw-core</name>
 
 
 
-
+    <!-- 属性 -->
     <properties>
+        <!-- Plugin的属性定义 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jdk.version>1.7</jdk.version>
         <spring.version>3.2.3.RELEASE</spring.version>
+        <springside.version>4.1.1-SNAPSHOT</springside.version>
         <jackson.version>2.2.2</jackson.version>
+        <quartz.version>2.2.0</quartz.version>
+
     </properties>
+    <!-- 项目依赖 -->
     <!-- http://search.maven.org/ -->
     <dependencies>
         <dependency>
@@ -21,25 +28,26 @@
             <artifactId>spring-core</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
@@ -59,6 +67,32 @@
             <scope>test</scope>
         </dependency>
 
+        <!--
+        <dependency>
+            <groupId>org.springside</groupId>
+            <artifactId>springside-core</artifactId>
+            <version>${springside.version}</version>
+        </dependency>
+        -->
+
+        <!-- 数据持久层：mybatis -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>1.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.2.2</version>
+        </dependency>
+
+        <!-- 数据库连接池 -->
+        <dependency>
+            <groupId>com.mchange</groupId>
+            <artifactId>c3p0</artifactId>
+            <version>0.9.2.1</version>
+        </dependency>
 
         <!-- driver mysql -->
         <dependency>
@@ -66,17 +100,13 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.9</version>
         </dependency>
-        <dependency>
-            <groupId>com.mchange</groupId>
-            <artifactId>c3p0</artifactId>
-            <version>0.9.2.1</version>
-        </dependency>
+
 
         <!-- NIO Server-->
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty</artifactId>
-            <version>3.6.6.Final</version>
+            <version>3.6.6.Final</version>  <!-- 4.0.4.Final is ok -->
         </dependency>
 
         <dependency>
@@ -97,6 +127,57 @@
             <artifactId>junit</artifactId>
             <version>4.8.2</version>
             <scope>test</scope>
+        </dependency>
+
+        <!-- JMS begin -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jms</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <!-- 消息总线系统 -->
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-all</artifactId>
+            <version>5.8.0</version>
+        </dependency>
+        <!--
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-core</artifactId>
+            <version>5.8.0</version>
+        </dependency>
+        -->
+        <!-- JMS end -->
+
+        <!-- 任务调度系统 -->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>${quartz.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz-oracle</artifactId>
+            <version>2.1.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz-weblogic</artifactId>
+            <version>2.1.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz-jboss</artifactId>
+            <version>2.1.7</version>
+        </dependency>
+
+
+        <!-- Hibernate缓存 -->
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <version>2.7.2</version>
         </dependency>
 
 
@@ -151,19 +232,43 @@
 
     </dependencies>
 
+    <!-- 编译配置 -->
+
     <build>
         <finalName>cloudwave</finalName>
         <defaultGoal>compile</defaultGoal>
+        <!-- 资源目录 -->
+        <!-- <sourceDirectory>${basedir}/src/main/java</sourceDirectory> -->
+        <!-- 输出目录 -->
+        <outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
             </resource>
             <resource>
-                <directory>src/main/java/cwiface</directory>
-                <excludes>
-                    <exclude>**/*.java</exclude>
-                </excludes>
-            </resource>
+				<directory>src/main/java/cwcore</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+			<resource>
+				<directory>src/main/java/cwserver</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+			<resource>
+				<directory>src/main/java/cwquartz</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+			<resource>
+				<directory>src/main/java/cwiface</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
             <resource>
                 <directory>src/main/java</directory>
                 <excludes>
@@ -255,6 +360,11 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <!-- 
+                    <webappDirectory>${basedir}/webapp</webappDirectory>
+                    <warSourceDirectory>${basedir}/webapp</warSourceDirectory>
+                     -->
+                    <!-- 
                     <webResources>
                         <resource>
                             <directory>src/main/webapp</directory>
@@ -264,14 +374,10 @@
                             <filtering>true</filtering>
                         </resource>
                     </webResources>
+                     -->
                 </configuration>
             </plugin>
 
-            <plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-release-plugin</artifactId>
-                <version>2.4.1</version>
-			</plugin>
             <!--
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -368,6 +474,10 @@
 
 
     <!-- Environment Settings -->
+    <issueManagement>
+        <system>Github</system>
+        <url>https://github.com/DolphinBoy/cloudwave-core/issues</url>
+    </issueManagement>
     <!--
     <ciManagement>
         <system>continuum</system>
@@ -397,6 +507,12 @@
         </mailingList>
     </mailingLists>
     -->
+
+    <scm>
+        <url>https://github.com/DolphinBoy/cloudwave-core</url>
+        <connection>scm:git:git://github.com/DolphinBoy/cloudwave.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com:DolphinBoy/cloudwave.git</developerConnection>
+    </scm>
 
     <!-- 远程版本库 -->
     <!--

@@ -1,6 +1,6 @@
-package cwserver.com.cloudwave.nio;
+package com.cloudwave.nio;
 
-import cwserver.com.cloudwave.Server;
+import com.cloudwave.Server;
 /**
  * User: DolphinBoy
  * Date: 13-6-26

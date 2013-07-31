@@ -1,4 +1,4 @@
-package cwserver.com.cloudwave;
+package com.cloudwave;
 
 /**
  * User: DolphinBoy

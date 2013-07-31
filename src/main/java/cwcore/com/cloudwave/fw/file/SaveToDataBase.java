@@ -1,4 +1,4 @@
-package cwcore.com.cloudwave.file;
+package com.cloudwave.fw.file;
 
 /**
  * User: DolphinBoy

@@ -1,10 +1,10 @@
-package cwcore.com.cloudwave.file;
+package com.cloudwave.fw.file;
 
 /**
  * User: DolphinBoy
  * Date: 13-7-10
- * Time: 下午9:00
+ * Time: 下午9:01
  * To change this template use File | Settings | File Templates.
  */
-public class SaveToFile {
+public class SaveToRemote {
 }

@@ -1,6 +1,7 @@
-package cwapp.com.cloudwave.user.entity;
+package com.cloudwave.fw.app.domain;
 
-import cwapp.com.cloudwave.base.BaseEntity;
+import com.cloudwave.fw.domain.AbstractDomain;
+
 
 /**
  * User: DolphinBoy
@@ -8,6 +9,6 @@ import cwapp.com.cloudwave.base.BaseEntity;
  * Time: 下午9:56
  * To change this template use File | Settings | File Templates.
  */
-public class User extends BaseEntity {
+public class User extends AbstractDomain {
 
 }

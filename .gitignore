@@ -7,11 +7,18 @@ lib-cov
 *.pid
 *.gz
 
+
+webapp
+target
 pids
 logs
 results
 
 .idea
+.settings
+
+.classpath
+.project
 
 *.class
 
