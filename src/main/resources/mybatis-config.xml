@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!--表明重用预编译的SQL语句 -->
+	<settings>
+		<setting name="defaultExecutorType" value="REUSE" />
+	</settings>
+
+	<!--类型别名定义. 今后可只用Student来代替它冗长的 全限定名 -->
+	<typeAliases>
+		<typeAlias alias="TradeDetail"
+			type="com.dolphinboy.demo.ssi_demo.domain.TradeDetail" />
+	</typeAliases>
+
+	<!--
+		指定要用到的mapper文件. 
+		以下的resource属性告诉 MyBatis要在类路径下的resources目录下找StudentMapper.xml文件. 
+		我们将把mapper文件存放在src目录下的resources目录中, 
+		并让ant把resources目录拷贝到classes中，而classes目录会被ant添加到类路径中. -->
+
+	<mappers>
+		<!-- <package name="com/dolphinboy/demo/ssi_demo/domain/map/"/> -->
+		<mapper resource="com/dolphinboy/demo/ssi_demo/domain/map/TradeDetailMapper.xml" />
+		<!-- <mapper resource="TradeDetailMapper.xml" /> -->
+	</mappers>
+</configuration>

@@ -1,5 +1,7 @@
 package com.cloudwave.fw.domain;
 
-public interface Entity {
+import java.io.Serializable;
+
+public interface Entity extends Serializable {
 
 }

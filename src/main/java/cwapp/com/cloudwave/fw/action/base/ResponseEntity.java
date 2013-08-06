@@ -1,12 +1,13 @@
-package com.cloudwave.fw.action;
+package com.cloudwave.fw.action.base;
+
 
 /**
  * User: DolphinBoy
  * Date: 13-7-11
  * Time: 下午11:19
- * 统一返回消息封装
+ * Response返回实体封装
  */
-public class ResponseMessage implements Response {
+public class ResponseEntity implements Response {
     public static final String SUCCESS = "success";
     public static final String WARN = "warn";
     public static final String FAIL = "fail";
@@ -24,10 +25,10 @@ public class ResponseMessage implements Response {
     private Object data;
 
 
-    public ResponseMessage(String code) {
+    public ResponseEntity(String code) {
         this.code = code;
     }
-    public ResponseMessage(String code, String info) {
+    public ResponseEntity(String code, String info) {
         this.code = code;
         this.info = info;
     }

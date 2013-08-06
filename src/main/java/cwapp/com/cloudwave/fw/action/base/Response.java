@@ -1,4 +1,4 @@
-package com.cloudwave.fw.action;
+package com.cloudwave.fw.action.base;
 
 /**
  * User: DolphinBoy
@@ -7,4 +7,6 @@ package com.cloudwave.fw.action;
  * To change this template use File | Settings | File Templates.
  */
 public interface Response {
+	
+	
 }

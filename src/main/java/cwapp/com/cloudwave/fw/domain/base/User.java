@@ -1,4 +1,4 @@
-package com.cloudwave.fw.app.domain;
+package com.cloudwave.fw.domain.base;
 
 import com.cloudwave.fw.domain.AbstractDomain;
 

@@ -1,251 +1,365 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>com.cloudwave.cwfw</groupId>
-    <artifactId>cwfw-core</artifactId>
-    <packaging>war</packaging>
-    <version>1.0-SNAPSHOT</version>
-    <name>cwfw-core</name>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.cloudwave.cwfw</groupId>
+	<artifactId>cwfw-core</artifactId>
+	<packaging>war</packaging>
+	<version>1.0-SNAPSHOT</version>
+	<name>cwfw-core</name>
 
 
 
-    <!-- 属性 -->
-    <properties>
-        <!-- Plugin的属性定义 -->
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jdk.version>1.7</jdk.version>
-        <spring.version>3.2.3.RELEASE</spring.version>
-        <springside.version>4.1.1-SNAPSHOT</springside.version>
-        <jackson.version>2.2.2</jackson.version>
-        <quartz.version>2.2.0</quartz.version>
+	<!-- 属性 -->
+	<properties>
+		<!-- Plugin的属性定义 -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<jdk.version>1.7</jdk.version>
+		<spring.version>3.2.3.RELEASE</spring.version>
+		<spring.rest>1.1.0.M1</spring.rest>
+		<springside.version>4.1.1-SNAPSHOT</springside.version>
+		<jackson.version>2.2.2</jackson.version>
+		<logback.version>1.0.13</logback.version>
+		<quartz.version>2.2.0</quartz.version>
 
-    </properties>
-    <!-- 项目依赖 -->
-    <!-- http://search.maven.org/ -->
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context-support</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
+	</properties>
+	<!-- 项目依赖 -->
+	<!-- http://search.maven.org/ -->
+	<dependencies>
+		<!-- Spring 的核心工具包 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+			<!-- 
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
+			 -->
+		</dependency>
+		<!-- 对JDBC的简单封装 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- 整合第三方的ORM框架，如hibernate,ibatis,jdo，以及spring的JPA实现 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- Spring的面向切面编程,提供AOP(面向切面编程)实现 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- SpringWeb下的工具包 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- Spring 对Object/XMl的映射支持,可以让Java与XML之间来回切换 -->
+		<!-- 
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-oxm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		 -->
+		 <!-- Spring提供在基础IoC功能上的扩展服务，此外还提供许多企业级服务的支持，
+		 如邮件服务、任务调度、JNDI定位、EJB集成、远程访问、缓存以及各种视图层框架的封装等 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- Spring-context的扩展支持,用于MVC方面 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- SpringIoC(依赖注入)的基础实现 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- Spring提供对AspectJ框架的整合 -->
+		<!-- 
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		 -->
+		<!-- Spring独立的asm程序,相遇Spring2.5.6的时候需要asmJar 包.3.0开始提供他自己独立的asmJar -->
+		<!-- 
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-asm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		 -->
+		<!-- 为简化JMS API的使用而作的简单封装 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- 对Junit等测试框架的简单封装 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+			<scope>test</scope>
+		</dependency>
 
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
+		<!-- Spring Data REST -->
+		<!-- 
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-rest-webmvc</artifactId>
+			<version>${spring.rest}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-rest-repository</artifactId>
+			<version>${spring.rest}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-rest-core</artifactId>
+			<version>${spring.rest}</version>
+		</dependency>
+		 -->
 
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <version>${spring.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!--
-        <dependency>
-            <groupId>org.springside</groupId>
-            <artifactId>springside-core</artifactId>
-            <version>${springside.version}</version>
-        </dependency>
-        -->
-
-        <!-- 数据持久层：mybatis -->
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis-spring</artifactId>
-            <version>1.2.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
-            <version>3.2.2</version>
-        </dependency>
-
-        <!-- 数据库连接池 -->
-        <dependency>
-            <groupId>com.mchange</groupId>
-            <artifactId>c3p0</artifactId>
-            <version>0.9.2.1</version>
-        </dependency>
-
-        <!-- driver mysql -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.9</version>
-        </dependency>
-
-
-        <!-- NIO Server-->
-        <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty</artifactId>
-            <version>3.6.6.Final</version>  <!-- 4.0.4.Final is ok -->
-        </dependency>
-
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.servlet.jsp</groupId>
-            <artifactId>jsp-api</artifactId>
-            <version>2.1</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.8.2</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- JMS begin -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jms</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <!-- 消息总线系统 -->
-        <dependency>
-            <groupId>org.apache.activemq</groupId>
-            <artifactId>activemq-all</artifactId>
-            <version>5.8.0</version>
-        </dependency>
-        <!--
-        <dependency>
-            <groupId>org.apache.activemq</groupId>
-            <artifactId>activemq-core</artifactId>
-            <version>5.8.0</version>
-        </dependency>
-        -->
-        <!-- JMS end -->
-
-        <!-- 任务调度系统 -->
-        <dependency>
-            <groupId>org.quartz-scheduler</groupId>
-            <artifactId>quartz</artifactId>
-            <version>${quartz.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.quartz-scheduler</groupId>
-            <artifactId>quartz-oracle</artifactId>
-            <version>2.1.7</version>
-        </dependency>
-        <dependency>
-            <groupId>org.quartz-scheduler</groupId>
-            <artifactId>quartz-weblogic</artifactId>
-            <version>2.1.7</version>
-        </dependency>
-        <dependency>
-            <groupId>org.quartz-scheduler</groupId>
-            <artifactId>quartz-jboss</artifactId>
-            <version>2.1.7</version>
-        </dependency>
+		<!-- Spring Data JPA -->
+		<!-- 
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+			<version>1.4.0.BUILD-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.hateoas</groupId>
+			<artifactId>spring-hateoas</artifactId>
+			<version>0.7.0.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.plugin</groupId>
+			<artifactId>spring-plugin-core</artifactId>
+			<version>0.8.0.RELEASE</version>
+		</dependency>
+		 -->
 
 
-        <!-- Hibernate缓存 -->
-        <dependency>
-            <groupId>net.sf.ehcache</groupId>
-            <artifactId>ehcache</artifactId>
-            <version>2.7.2</version>
-        </dependency>
 
 
-        <dependency>
-            <groupId>jstl</groupId>
-            <artifactId>jstl</artifactId>
-            <version>1.2</version>
-        </dependency>
-
-        <!-- 来自阿里巴巴开源社区的JSON序列化和反序列化工具 -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.1.32</version>
-        </dependency>
-
-        <!-- spring mvc 返回JSON时依赖的JAR包-->
-        <!--
-        <dependency>
-            <groupId>org.codehaus.jackson</groupId>
-            <artifactId>jackson-core-asl</artifactId>
-            <version>1.9.12</version>
-        </dependency>
-        -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-            <version>${jackson.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-            <version>${jackson.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>${jackson.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.module</groupId>
-            <artifactId>jackson-module-jaxb-annotations</artifactId>
-            <version>${jackson.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>commons-fileupload</groupId>
-            <artifactId>commons-fileupload</artifactId>
-            <version>1.3</version>
-        </dependency>
 
 
-    </dependencies>
+		<!-- <dependency> <groupId>org.springside</groupId> <artifactId>springside-core</artifactId> 
+			<version>${springside.version}</version> </dependency> -->
 
-    <!-- 编译配置 -->
+		<!-- 数据持久层：mybatis -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>1.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.2.2</version>
+		</dependency>
 
-    <build>
-        <finalName>cloudwave</finalName>
-        <defaultGoal>compile</defaultGoal>
-        <!-- 资源目录 -->
-        <!-- <sourceDirectory>${basedir}/src/main/java</sourceDirectory> -->
-        <!-- 输出目录 -->
-        <outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-            </resource>
-            <resource>
+		<!-- 数据库连接池 -->
+		<dependency>
+			<groupId>com.mchange</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.2.1</version>
+		</dependency>
+
+		<!-- driver mysql -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.9</version>
+		</dependency>
+
+
+		<!-- NIO Server -->
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty</artifactId>
+			<version>3.6.6.Final</version>  <!-- 4.0.4.Final is ok -->
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.1</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.2</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- JMS begin -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- 消息总线系统 -->
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-all</artifactId>
+			<version>5.8.0</version>
+		</dependency>
+		<!-- <dependency> <groupId>org.apache.activemq</groupId> <artifactId>activemq-core</artifactId> 
+			<version>5.8.0</version> </dependency> -->
+		<!-- JMS end -->
+
+		<!-- 任务调度系统 -->
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>${quartz.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz-oracle</artifactId>
+			<version>2.1.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz-weblogic</artifactId>
+			<version>2.1.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz-jboss</artifactId>
+			<version>2.1.7</version>
+		</dependency>
+
+
+		<!-- Hibernate缓存 -->
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+			<version>2.7.2</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<!-- 
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>1.7.2</version>
+			<scope>runtime</scope>
+		</dependency>
+		 -->
+		<!-- 
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.7.2</version>
+			<scope>runtime</scope>
+		</dependency>
+		 -->
+		<!-- 来自阿里巴巴开源社区的JSON序列化和反序列化工具 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.1.32</version>
+		</dependency>
+
+		<!-- spring mvc 返回JSON时依赖的JAR包 -->
+		<!-- <dependency> <groupId>org.codehaus.jackson</groupId> <artifactId>jackson-core-asl</artifactId> 
+			<version>1.9.12</version> </dependency> -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.module</groupId>
+			<artifactId>jackson-module-jaxb-annotations</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+
+		<!-- Logging -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.3</version>
+		</dependency>
+
+
+	</dependencies>
+
+	<!-- 编译配置 -->
+
+	<build>
+		<finalName>cloudwave</finalName>
+		<defaultGoal>compile</defaultGoal>
+		<!-- 资源目录 -->
+		<!-- <sourceDirectory>${basedir}/src/main/java</sourceDirectory> -->
+		<!-- 输出目录 -->
+		<outputDirectory>${basedir}/src/main/webapp/WEB-INF/classes</outputDirectory>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+			<resource>
 				<directory>src/main/java/cwcore</directory>
 				<excludes>
 					<exclude>**/*.java</exclude>
@@ -269,287 +383,200 @@
 					<exclude>**/*.java</exclude>
 				</excludes>
 			</resource>
-            <resource>
-                <directory>src/main/java</directory>
-                <excludes>
-                    <exclude>**/*.java</exclude>
-                </excludes>
-            </resource>
-        </resources>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.0.2</version>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.4.3</version>
-                <configuration>
-                    <includes>
-                        <include>**/*Tests.java</include>
-                    </includes>
-                </configuration>
-            </plugin>
-            <plugin>
-                <!-- jetty 插件-->
-                <!-- 配置参考：http://wiki.eclipse.org/Jetty/Feature/Jetty_Maven_Plugin -->
-                <groupId>org.mortbay.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>7.0.1.v20091125</version>
-                <configuration>
-                    <webApp>
-                        <contextPath>/</contextPath>
-                        <!-- <contextPath>/${build.finalName}</contextPath> -->
-                        <baseResource implementation="org.eclipse.jetty.util.resource.ResourceCollection">
-                            <resourcesAsCSV>src/main/webapp,/yet/another/folder</resourcesAsCSV>
-                        </baseResource>
-                    </webApp>
-                    <!-- 默认为0表示禁用热部署，非0为支持热部署-->
-                    <scanIntervalSeconds>1</scanIntervalSeconds>
-                    <scanTargetPatterns>
-                        <scanTargetPattern>
-                            <directory>src/main/webapp</directory>
-                            <includes>
-                                <include>**/*.xml</include>
-                                <include>**/*.properties</include>
-                            </includes>
-                        </scanTargetPattern>
-                    </scanTargetPatterns>
-                    <connectors>
-                        <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
-                            <port>8080</port>
-                            <maxIdleTime>60000</maxIdleTime>
-                        </connector>
-                    </connectors>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>2.4</version>
-                <!--
-                <configuration>
-                    <excludes>
-                        <exclude>struts.xml</exclude>
-                        <exclude>sqlconfig.xml</exclude>
-                        <exclude>lang_app_en_GB.properties</exclude>
-                        <exclude>lang_app_zh_CN.properties</exclude>
-                    </excludes>
-                </configuration>
-                -->
-            </plugin>
-            <plugin>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>2.3</version>
-                <executions>
-                    <execution>
-                        <id>default-war</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>war</goal>
-                        </goals>
-                        <configuration>
-                            <classifier>war</classifier>
-                            <packagingExcludes>WEB-INF/web.xml</packagingExcludes>
-                        </configuration>
-                    </execution>
-                </executions>
-                <configuration>
-                    <!-- 
-                    <webappDirectory>${basedir}/webapp</webappDirectory>
-                    <warSourceDirectory>${basedir}/webapp</warSourceDirectory>
-                     -->
-                    <!-- 
-                    <webResources>
-                        <resource>
-                            <directory>src/main/webapp</directory>
-                            <includes>
-                                <include>version.txt</include>
-                            </includes>
-                            <filtering>true</filtering>
-                        </resource>
-                    </webResources>
-                     -->
-                </configuration>
-            </plugin>
-
-            <!--
+			<resource>
+				<directory>src/main/java/cwriding</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+			<resource>
+				<directory>src/main/java</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+		</resources>
+		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-assembly-plugin</artifactId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.0.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.4.3</version>
+				<configuration>
+					<includes>
+						<include>**/*Tests.java</include>
+					</includes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<!-- jetty 插件 -->
+				<!-- 配置参考：http://wiki.eclipse.org/Jetty/Feature/Jetty_Maven_Plugin -->
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>7.0.1.v20091125</version>
+				<configuration>
+					<webApp>
+						<contextPath>/</contextPath>
+						<!-- <contextPath>/${build.finalName}</contextPath> -->
+						<baseResource implementation="org.eclipse.jetty.util.resource.ResourceCollection">
+							<resourcesAsCSV>src/main/webapp,/yet/another/folder</resourcesAsCSV>
+						</baseResource>
+					</webApp>
+					<!-- 默认为0表示禁用热部署，非0为支持热部署 -->
+					<scanIntervalSeconds>1</scanIntervalSeconds>
+					<scanTargetPatterns>
+						<scanTargetPattern>
+							<directory>src/main/webapp</directory>
+							<includes>
+								<include>**/*.xml</include>
+								<include>**/*.properties</include>
+							</includes>
+						</scanTargetPattern>
+					</scanTargetPatterns>
+					<connectors>
+						<connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+							<port>8080</port>
+							<maxIdleTime>60000</maxIdleTime>
+						</connector>
+					</connectors>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.4</version>
+				<!-- <configuration> <excludes> <exclude>struts.xml</exclude> <exclude>sqlconfig.xml</exclude> 
+					<exclude>lang_app_en_GB.properties</exclude> <exclude>lang_app_zh_CN.properties</exclude> 
+					</excludes> </configuration> -->
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.3</version>
 				<executions>
 					<execution>
-						<id>distr-assembly</id>
+						<id>default-war</id>
 						<phase>package</phase>
 						<goals>
-							<goal>single</goal>
+							<goal>war</goal>
 						</goals>
 						<configuration>
-							<descriptors>
-								<descriptor>src/main/assembly/assembly-jsp.xml</descriptor>
-							</descriptors>
+							<classifier>war</classifier>
+							<packagingExcludes>WEB-INF/web.xml</packagingExcludes>
 						</configuration>
 					</execution>
 				</executions>
 				<configuration>
-					<descriptors>
-						<descriptor>src/main/assembly/assembly-distr.xml</descriptor>
-					</descriptors>
+					<!-- <webappDirectory>${basedir}/webapp</webappDirectory> <warSourceDirectory>${basedir}/webapp</warSourceDirectory> -->
+					<!-- <webResources> <resource> <directory>src/main/webapp</directory> 
+						<includes> <include>version.txt</include> </includes> <filtering>true</filtering> 
+						</resource> </webResources> -->
 				</configuration>
 			</plugin>
-            -->
-        </plugins>
-    </build>
-    <!--
-    <reporting>
-        <outputDirectory>${basedir}/target/site</outputDirectory>
-        <plugins>
-            <plugin>
-                <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>2.0.1</version>
-                <reportSets>
-                    <reportSet></reportSet>
-                </reportSets>
-            </plugin>
-        </plugins>
-    </reporting>
-    -->
 
-    <!-- More Project Information -->
-    <description>移动服务端框架</description>
-    <url>http://github.com/dolphinboy/cloudwave-core.git</url>
-    <inceptionYear>yes</inceptionYear>
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-            <comments>A business-friendly OSS license</comments>
-        </license>
-    </licenses>
-    <organization>
-        <name>CloudWave</name>
-        <url>http://cloudwave.org</url>
-    </organization>
-    <developers>
-        <developer>
-            <id>DolphinBoy</id>
-            <name>DolphinBoy</name>
-            <email>dolphinboyo@gmail.com</email>
-            <url>http://dolphinboy.me</url>
-            <organization>CloudWave</organization>
-            <organizationUrl>http://github.com/dolphinboy/cloudwave</organizationUrl>
-            <roles>
-                <role>architect</role>
-                <role>developer</role>
-            </roles>
-            <timezone>-6</timezone>
-            <properties>
-                <picUrl>http://tinyurl.com/prv4t</picUrl>
-            </properties>
-        </developer>
-    </developers>
-    <contributors>
-        <contributor>
-            <name>AliceGirl</name>
-            <email>name@gmail.com</email>
-            <url>http://noellemarie.com</url>
-            <organization>Noelle Marie</organization>
-            <organizationUrl>http://noellemarie.com</organizationUrl>
-            <roles>
-                <role>tester</role>
-            </roles>
-            <timezone>America/Vancouver</timezone>
-            <properties>
-                <gtalk>some.name@gmail.com</gtalk>
-            </properties>
-        </contributor>
-    </contributors>
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-assembly-plugin</artifactId> 
+				<executions> <execution> <id>distr-assembly</id> <phase>package</phase> <goals> 
+				<goal>single</goal> </goals> <configuration> <descriptors> <descriptor>src/main/assembly/assembly-jsp.xml</descriptor> 
+				</descriptors> </configuration> </execution> </executions> <configuration> 
+				<descriptors> <descriptor>src/main/assembly/assembly-distr.xml</descriptor> 
+				</descriptors> </configuration> </plugin> -->
+		</plugins>
+	</build>
+	<!-- <reporting> <outputDirectory>${basedir}/target/site</outputDirectory> 
+		<plugins> <plugin> <artifactId>maven-project-info-reports-plugin</artifactId> 
+		<version>2.0.1</version> <reportSets> <reportSet></reportSet> </reportSets> 
+		</plugin> </plugins> </reporting> -->
+
+	<!-- More Project Information -->
+	<description>移动服务端框架</description>
+	<url>http://github.com/dolphinboy/cloudwave-core.git</url>
+	<inceptionYear>yes</inceptionYear>
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+			<comments>A business-friendly OSS license</comments>
+		</license>
+	</licenses>
+	<organization>
+		<name>CloudWave</name>
+		<url>http://cloudwave.org</url>
+	</organization>
+	<developers>
+		<developer>
+			<id>DolphinBoy</id>
+			<name>DolphinBoy</name>
+			<email>dolphinboyo@gmail.com</email>
+			<url>http://dolphinboy.me</url>
+			<organization>CloudWave</organization>
+			<organizationUrl>http://github.com/dolphinboy/cloudwave</organizationUrl>
+			<roles>
+				<role>architect</role>
+				<role>developer</role>
+			</roles>
+			<timezone>-6</timezone>
+			<properties>
+				<picUrl>http://tinyurl.com/prv4t</picUrl>
+			</properties>
+		</developer>
+	</developers>
+	<contributors>
+		<contributor>
+			<name>AliceGirl</name>
+			<email>name@gmail.com</email>
+			<url>http://noellemarie.com</url>
+			<organization>Noelle Marie</organization>
+			<organizationUrl>http://noellemarie.com</organizationUrl>
+			<roles>
+				<role>tester</role>
+			</roles>
+			<timezone>America/Vancouver</timezone>
+			<properties>
+				<gtalk>some.name@gmail.com</gtalk>
+			</properties>
+		</contributor>
+	</contributors>
 
 
 
-    <!-- Environment Settings -->
-    <issueManagement>
-        <system>Github</system>
-        <url>https://github.com/DolphinBoy/cloudwave-core/issues</url>
-    </issueManagement>
-    <!--
-    <ciManagement>
-        <system>continuum</system>
-        <url>http://127.0.0.1:8080/continuum</url>
-        <notifiers>
-            <notifier>
-                <type>mail</type>
-                <sendOnError>true</sendOnError>
-                <sendOnFailure>true</sendOnFailure>
-                <sendOnSuccess>false</sendOnSuccess>
-                <sendOnWarning>false</sendOnWarning>
-                <configuration><address>continuum@127.0.0.1</address></configuration>
-            </notifier>
-        </notifiers>
-    </ciManagement>
+	<!-- Environment Settings -->
+	<issueManagement>
+		<system>Github</system>
+		<url>https://github.com/DolphinBoy/cloudwave-core/issues</url>
+	</issueManagement>
+	<!-- <ciManagement> <system>continuum</system> <url>http://127.0.0.1:8080/continuum</url> 
+		<notifiers> <notifier> <type>mail</type> <sendOnError>true</sendOnError> 
+		<sendOnFailure>true</sendOnFailure> <sendOnSuccess>false</sendOnSuccess> 
+		<sendOnWarning>false</sendOnWarning> <configuration><address>continuum@127.0.0.1</address></configuration> 
+		</notifier> </notifiers> </ciManagement> <mailingLists> <mailingList> <name>User 
+		List</name> <subscribe>user-subscribe@127.0.0.1</subscribe> <unsubscribe>user-unsubscribe@127.0.0.1</unsubscribe> 
+		<post>user@127.0.0.1</post> <archive>http://127.0.0.1/user/</archive> <otherArchives> 
+		<otherArchive>http://base.google.com/base/1/127.0.0.1</otherArchive> </otherArchives> 
+		</mailingList> </mailingLists> -->
 
-    <mailingLists>
-        <mailingList>
-            <name>User List</name>
-            <subscribe>user-subscribe@127.0.0.1</subscribe>
-            <unsubscribe>user-unsubscribe@127.0.0.1</unsubscribe>
-            <post>user@127.0.0.1</post>
-            <archive>http://127.0.0.1/user/</archive>
-            <otherArchives>
-                <otherArchive>http://base.google.com/base/1/127.0.0.1</otherArchive>
-            </otherArchives>
-        </mailingList>
-    </mailingLists>
-    -->
+	<scm>
+		<url>https://github.com/DolphinBoy/cloudwave-core</url>
+		<connection>scm:git:git://github.com/DolphinBoy/cloudwave.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com:DolphinBoy/cloudwave.git</developerConnection>
+	</scm>
 
-    <scm>
-        <url>https://github.com/DolphinBoy/cloudwave-core</url>
-        <connection>scm:git:git://github.com/DolphinBoy/cloudwave.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com:DolphinBoy/cloudwave.git</developerConnection>
-    </scm>
-
-    <!-- 远程版本库 -->
-    <!--
-    <repositories>
-        <repository>
-            <id>maven-repo</id>
-            <name>Apache Maven Resources</name>
-            <url>http://repo1.maven.org/maven2/org/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>springsource-repo</id>
-            <name>SpringSource Repository</name>
-            <url>http://repo.springsource.org/release</url>
-        </repository>
-        <repository>
-            <id>apache.nexus</id>
-            <name>ASF Nexus Staging</name>
-            <url>https://repository.apache.org/content/groups/staging/</url>
-        </repository>
-        <repository>
-            <id>typesafe</id>
-            <name>typesafe</name>
-            <url>http://repo.typesafe.com/typesafe/releases/</url>
-        </repository>
-        <repository>
-            <id>Alibaba-repo</id>
-            <name>Alibaba</name>
-            <url>http://code.alibabatech.com/mvn/releases/</url>
-        </repository>
-    </repositories>
-    -->
+	<!-- 远程版本库 -->
+	<!-- <repositories> <repository> <id>maven-repo</id> <name>Apache Maven 
+		Resources</name> <url>http://repo1.maven.org/maven2/org/</url> <releases> 
+		<enabled>true</enabled> </releases> <snapshots> <enabled>true</enabled> </snapshots> 
+		</repository> <repository> <id>springsource-repo</id> <name>SpringSource 
+		Repository</name> <url>http://repo.springsource.org/release</url> </repository> 
+		<repository> <id>apache.nexus</id> <name>ASF Nexus Staging</name> <url>https://repository.apache.org/content/groups/staging/</url> 
+		</repository> <repository> <id>typesafe</id> <name>typesafe</name> <url>http://repo.typesafe.com/typesafe/releases/</url> 
+		</repository> <repository> <id>Alibaba-repo</id> <name>Alibaba</name> <url>http://code.alibabatech.com/mvn/releases/</url> 
+		</repository> </repositories> -->
 
 
 
