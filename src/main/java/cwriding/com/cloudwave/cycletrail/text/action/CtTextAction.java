@@ -1,13 +1,25 @@
 package com.cloudwave.cycletrail.text.action;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.cloudwave.cycletrail.text.service.CtTextService;
 
 @Controller
 @RequestMapping("/text")
 public class CtTextAction {
 
+	@Resource
+	private CtTextService ctTextService;
+	
+	
 	@RequestMapping(method = RequestMethod.POST,  value="/save")
 	public void save() {
 		
@@ -18,9 +30,16 @@ public class CtTextAction {
 		
 	}
 	
+	@ResponseBody
 	@RequestMapping(method = RequestMethod.GET,  value="/find")
-	public void find() {
-		
+	public Object find() {
+		List<String> list = new ArrayList<String>();
+        list.add("电视");
+        list.add("洗衣机");
+        list.add("冰箱");
+        list.add("电脑");
+        list.add("汽车");
+        return list;
 	}
 	
 	@RequestMapping(method = RequestMethod.GET,  value="/get/{id}")

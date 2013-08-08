@@ -2,7 +2,7 @@ package com.cloudwave.fw.domain;
 
 import java.util.Date;
 
-import com.cloudwave.fw.domain.base.User;
+import com.cloudwave.fw.app.domain.User;
 
 public abstract class AbstractDomain extends AbstractEntity {
 	protected Date createTime; // 对象的创建时间

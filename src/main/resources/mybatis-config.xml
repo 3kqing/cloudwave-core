@@ -10,8 +10,8 @@
 
 	<!--类型别名定义. 今后可只用Student来代替它冗长的 全限定名 -->
 	<typeAliases>
-		<typeAlias alias="TradeDetail"
-			type="com.dolphinboy.demo.ssi_demo.domain.TradeDetail" />
+		<package name="com.cloudwave.fw.app.domain"/>
+		<!-- <typeAlias alias="User" type="com.cloudwave.fw.app.domain.User" /> -->
 	</typeAliases>
 
 	<!--
@@ -22,7 +22,7 @@
 
 	<mappers>
 		<!-- <package name="com/dolphinboy/demo/ssi_demo/domain/map/"/> -->
-		<mapper resource="com/dolphinboy/demo/ssi_demo/domain/map/TradeDetailMapper.xml" />
+		<package name="com.cloudwave.fw.app.domain.map"/>
 		<!-- <mapper resource="TradeDetailMapper.xml" /> -->
 	</mappers>
 </configuration>
