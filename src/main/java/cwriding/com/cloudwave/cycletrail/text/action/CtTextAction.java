@@ -42,8 +42,16 @@ public class CtTextAction {
         return list;
 	}
 	
-	@RequestMapping(method = RequestMethod.GET,  value="/get/{id}")
-	public void get() {
-		
+	@ResponseBody
+	@RequestMapping(method = RequestMethod.GET,  value="/{id}")
+	public Object load() {
+		System.out.println(this.ctTextService.get("1"));
+		List<String> list = new ArrayList<String>();
+        list.add("电视");
+        list.add("洗衣机");
+        list.add("冰箱");
+        list.add("电脑");
+        list.add("汽车");
+        return list;
 	}
 }

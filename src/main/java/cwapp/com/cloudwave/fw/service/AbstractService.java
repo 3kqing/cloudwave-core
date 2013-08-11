@@ -5,16 +5,16 @@ import com.cloudwave.fw.domain.AbstractEntity;
 
 
 
-public abstract class AbstractService implements BaseService {
+public abstract class AbstractService implements Service {
 	private AbstractDao<AbstractEntity> baseDao;
 	
 	//public abstract void save();
 	
 	
 
-	public AbstractEntity get() {
+	public AbstractEntity get(String id) {
 		
-		return null;
+		return this.baseDao.get(id);
 	}
 	
 	

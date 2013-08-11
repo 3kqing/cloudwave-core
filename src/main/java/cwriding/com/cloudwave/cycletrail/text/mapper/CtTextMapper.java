@@ -1,5 +1,7 @@
 package com.cloudwave.cycletrail.text.mapper;
 
+import org.springframework.stereotype.Repository;
+
 import com.cloudwave.cycletrail.text.domain.CtText;
 import com.cloudwave.fw.dao.Mapper;
 

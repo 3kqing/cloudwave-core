@@ -5,6 +5,9 @@ import java.util.Date;
 import com.cloudwave.fw.app.domain.User;
 
 public abstract class AbstractDomain extends AbstractEntity {
+	
+	protected Integer order;
+	
 	protected Date createTime; // 对象的创建时间
 	protected User createBy; // 持久化对象的创建人
 	protected Date lastUpdateTime; // 该对象最后更新时间
