@@ -12,10 +12,10 @@ public abstract class AbstractService implements Service {
 	
 	
 
-	public AbstractEntity get(String id) {
-		
-		return this.baseDao.get(id);
-	}
-	
+//	public AbstractEntity get(String id) {
+//		
+//		return this.baseDao.get(id);
+//	}
+
 	
 }

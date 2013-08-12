@@ -56,10 +56,13 @@
         <property name="minPoolSize" value="10" />
     </bean>
 
-	<jdbc:initialize-database data-source="dataSource" ignore-failures="ALL" enabled="#{application.init_database}">
+	<!-- <jdbc:initialize-database data-source="dataSource" ignore-failures="ALL" enabled="#{app.init_database}"> -->
+	<!-- 
+	<jdbc:initialize-database data-source="dataSource" ignore-failures="ALL" enabled="true">
 		<jdbc:script location="classpath:sql/init-mysql.sql" encoding="UTF-8"/>
 		<jdbc:script location="classpath:sql/init-oracle.sql" encoding="UTF-8"/>
 	</jdbc:initialize-database>
+	 -->
 
     <!-- Mybatis配置 -->
     <!-- 
