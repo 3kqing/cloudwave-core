@@ -5,7 +5,8 @@ import java.util.Date;
 import com.cloudwave.fw.app.domain.User;
 
 public abstract class AbstractDomain extends AbstractEntity {
-	
+	private static final long serialVersionUID = 2312584095541134709L;
+
 	protected Integer order;
 	
 	protected Date createTime; // 对象的创建时间
@@ -15,5 +16,40 @@ public abstract class AbstractDomain extends AbstractEntity {
 	protected Boolean enable; // 该对象的有效标识
 	
 	
-	
+	public Integer getOrder() {
+		return order;
+	}
+	public void setOrder(Integer order) {
+		this.order = order;
+	}
+	public Date getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+	public User getCreateBy() {
+		return createBy;
+	}
+	public void setCreateBy(User createBy) {
+		this.createBy = createBy;
+	}
+	public Date getLastUpdateTime() {
+		return lastUpdateTime;
+	}
+	public void setLastUpdateTime(Date lastUpdateTime) {
+		this.lastUpdateTime = lastUpdateTime;
+	}
+	public User getLastUpdateBy() {
+		return lastUpdateBy;
+	}
+	public void setLastUpdateBy(User lastUpdateBy) {
+		this.lastUpdateBy = lastUpdateBy;
+	}
+	public Boolean getEnable() {
+		return enable;
+	}
+	public void setEnable(Boolean enable) {
+		this.enable = enable;
+	}
 }

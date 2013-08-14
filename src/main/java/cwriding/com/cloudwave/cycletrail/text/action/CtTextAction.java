@@ -6,11 +6,14 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cloudwave.cycletrail.text.domain.CtText;
 import com.cloudwave.cycletrail.text.service.CtTextService;
+import com.cloudwave.fw.app.domain.User;
 
 @Controller
 @RequestMapping("/text")
@@ -21,8 +24,14 @@ public class CtTextAction {
 	
 	
 	@RequestMapping(method = RequestMethod.POST,  value="/save")
-	public void save() {
+	public void save(@ModelAttribute("ctText") CtText t) {
+		User u = new User();
+		u.setId("1");
 		
+		t.setId("11");
+//		t.setContent("测试文本");
+		t.setUser(u);
+		this.ctTextService.save(t);
 	}
 	
 	@RequestMapping(method = RequestMethod.GET,  value="/search")
