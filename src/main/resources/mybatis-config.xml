@@ -39,7 +39,7 @@
 
 	<!--类型别名定义. 今后可只用Student来代替它冗长的 全限定名 -->
 	<typeAliases>
-		<package name="com.cloudwave.fw.app.domain"/>
+		<package name="com.cloudwave.cycletrail.text.domain"/>
 		<!-- <typeAlias alias="User" type="com.cloudwave.fw.app.domain.User" /> -->
 	</typeAliases>
 
@@ -51,7 +51,7 @@
 
 	<mappers>
 		<!-- <package name="com/dolphinboy/demo/ssi_demo/domain/map/"/> -->
-		<package name="com.cloudwave.fw.app.domain.map"/>
+		<package name="com.cloudwave.cycletrail.text.mapper"/>
 		<!-- <mapper resource="TradeDetailMapper.xml" /> -->
 	</mappers>
 </configuration>

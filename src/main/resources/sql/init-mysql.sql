@@ -1,2 +1,2 @@
 -- 创建数据库
-if not exist cloudwave create database cloudwave default character set utf-8;
+create database if not exists biketrail default character set utf8;

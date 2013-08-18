@@ -1,4 +1,4 @@
-package com.cloudwave.cycletrail.text.action;
+package com.cloudwave.cycletrail.action;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cloudwave.cycletrail.text.domain.CtText;
-import com.cloudwave.cycletrail.text.service.CtTextService;
+import com.cloudwave.cycletrail.domain.CtText;
+import com.cloudwave.cycletrail.service.CtTextService;
 import com.cloudwave.fw.app.domain.User;
 
 @Controller
@@ -54,7 +54,7 @@ public class CtTextAction {
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.GET,  value="/{id}")
 	public Object load() {
-		System.out.println(this.ctTextService.get("1"));
+		System.out.println(this.ctTextService.get("1").getId());
 		List<String> list = new ArrayList<String>();
         list.add("电视");
         list.add("洗衣机");

@@ -10,7 +10,7 @@
 	<context:annotation-config />
 
 	<!-- 自动扫描且只扫描@Controller -->
-	<context:component-scan base-package="com.cloudwave" use-default-filters="false">
+	<context:component-scan base-package="com.cloudwave.cycletrail.action" use-default-filters="false">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 		<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice" />
 		<!-- <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" /> -->
@@ -52,6 +52,7 @@
 	</bean>
 	
 	<!-- 将Controller抛出的异常转到特定View, 保持SiteMesh的装饰效果 -->
+	<!-- 
 	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">  
 		<property name="exceptionMappings">  
 			<props>
@@ -60,6 +61,7 @@
             </props>  
 		</property>  
     </bean>
+	 -->
     
 
 

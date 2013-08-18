@@ -1,11 +1,11 @@
-package com.cloudwave.cycletrail.text.service;
+package com.cloudwave.cycletrail.service;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.cloudwave.cycletrail.text.domain.CtText;
-import com.cloudwave.cycletrail.text.mapper.CtTextMapper;
+import com.cloudwave.cycletrail.domain.CtText;
+import com.cloudwave.cycletrail.mapper.CtTextMapper;
 import com.cloudwave.fw.domain.AbstractEntity;
 import com.cloudwave.fw.service.AbstractService;
 

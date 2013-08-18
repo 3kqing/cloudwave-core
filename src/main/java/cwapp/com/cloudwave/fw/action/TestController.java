@@ -121,7 +121,8 @@ public class TestController {
 
     @RequestMapping(method = RequestMethod.POST, value="/upload")
     public void upload(@RequestParam("file") MultipartFile file) throws IllegalStateException, IOException {
-        if (!file.isEmpty()) {
+        
+    	if (!file.isEmpty()) {
             String type = file.getContentType();
             String filename = file.getOriginalFilename();
             String newfilename = "F:/Temp/"+ UUID.randomUUID()

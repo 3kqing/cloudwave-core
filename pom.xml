@@ -400,6 +400,21 @@
             <artifactId>kaptcha</artifactId>
             <version>${kaptcha.version}</version>
         </dependency>
+        
+        <!-- 
+        用于解析图片EXIF信息
+        其中metadata-extractor未受Maven管理
+         -->
+        <dependency>
+            <groupId>com.google.code.metadata</groupId>
+            <artifactId>metadata-extractor</artifactId>
+            <version>2.6.4</version>
+        </dependency>
+        <dependency>
+			<groupId>com.adobe.xmp</groupId>
+			<artifactId>xmpcore</artifactId>
+			<version>5.1.2</version>
+		</dependency>
 	</dependencies>
 
 	<!-- 编译配置 -->

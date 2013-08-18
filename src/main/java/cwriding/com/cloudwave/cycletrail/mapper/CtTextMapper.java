@@ -1,6 +1,6 @@
-package com.cloudwave.cycletrail.text.mapper;
+package com.cloudwave.cycletrail.mapper;
 
-import com.cloudwave.cycletrail.text.domain.CtText;
+import com.cloudwave.cycletrail.domain.CtText;
 import com.cloudwave.fw.dao.Mapper;
 
 /**

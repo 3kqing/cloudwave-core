@@ -11,7 +11,7 @@
 </head>
 <body>
 <h1>选择上传文件</h1>
-<form action="/mobile/upload" method="post" enctype="multipart/form-data">
+<form action="/picture/upload" method="post" enctype="multipart/form-data">
     文件名：<input type="text" name="name" /><br/>
     <input type="file" name="file" /><br/>
     <input type="submit" />

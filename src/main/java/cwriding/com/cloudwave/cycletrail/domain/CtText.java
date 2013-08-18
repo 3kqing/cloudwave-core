@@ -1,4 +1,4 @@
-package com.cloudwave.cycletrail.text.domain;
+package com.cloudwave.cycletrail.domain;
 
 import com.cloudwave.fw.app.domain.User;
 import com.cloudwave.fw.domain.AbstractDomain;
