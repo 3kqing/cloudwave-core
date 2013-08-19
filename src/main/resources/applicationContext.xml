@@ -22,6 +22,7 @@
     <!-- 定义受环境影响易变的变量 -->
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+        <!-- <property name="autoLoadClasspath" value="true"></property> -->
         <property name="ignoreResourceNotFound" value="true" />
         <property name="locations">
             <list>
@@ -78,7 +79,7 @@
  	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
-		<property name="typeAliasesPackage" value="com.cloudwave.cycletrail.domain" />
+		<property name="typeAliasesPackage" value="com.cloudwave.fwapp.module;com.cloudwave.cycletrail.domain" />
 		<!-- 显式指定Mapper文件位置 -->
 		<property name="mapperLocations" value="classpath*:/mapper/*Mapper.xml" />
 	</bean>

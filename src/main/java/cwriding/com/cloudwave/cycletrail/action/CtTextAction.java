@@ -13,11 +13,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cloudwave.cycletrail.domain.CtText;
 import com.cloudwave.cycletrail.service.CtTextService;
-import com.cloudwave.fw.app.domain.User;
+import com.cloudwave.fwapp.base.action.AbstractAction;
+import com.cloudwave.fwapp.module.domain.User;
 
 @Controller
 @RequestMapping("/text")
-public class CtTextAction {
+public class CtTextAction extends AbstractAction {
 
 	@Resource
 	private CtTextService ctTextService;

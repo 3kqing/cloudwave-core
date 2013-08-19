@@ -6,11 +6,12 @@
 <mapper namespace="com.cloudwave.cycletrail.mapper.CtTextMapper">
 
 	<!--定义java bean的属性与数据库表的列之间的映射。type="Student"用到了configuration.xml中定义的别名 -->
-	<resultMap id="ctTextMap" type="CtText">
+	<resultMap id="ct_text_map" type="CtText">
 		<!--id映射 -->
 		<id property="id" column="id_" javaType="string" />
 		<!--普通属性映射 -->
 		<result property="content" column="content_" />
+		<result property="time" column="time_" />
 		<!-- <result property="user" column="user_id" /> -->
 	</resultMap>
 
@@ -19,10 +20,10 @@
 		ct_text(id_, content_, user_id)
 		values(#{id}, #{content}, #{user})
 	</insert>
-	<sql id="ctTextClumns">id_,content_,user_id</sql>
+	<sql id="ct_text_cols">id_,content_,time_,user_id</sql>
 	<!--与StudentMapper接口中的getById方法对应, 包括 方法名和参数类型. SQL语句中以“#{}”的形式引用参数 -->
-	<select id="get" parameterType="string" resultMap="ctTextMap">
-		select <include refid="ctTextClumns"/> 
+	<select id="get" parameterType="string" resultMap="ct_text_map">
+		select <include refid="ct_text_cols"/> 
 		from ct_text t 
 		where t.id_ = #{id}
 	</select>

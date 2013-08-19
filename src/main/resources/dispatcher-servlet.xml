@@ -148,7 +148,7 @@
 		<property name="defaultEncoding" value="UTF-8" />
 		<property name="maxInMemorySize" value="4096" />
 		<property name="maxUploadSize" value="5368709120" />
-		<property name="uploadTempDir" value="temp" />
+		<property name="uploadTempDir" value="temp" /> <!-- 这里貌似不能用绝对路径 -->
 	</bean>
 
 	<!-- <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager"> 

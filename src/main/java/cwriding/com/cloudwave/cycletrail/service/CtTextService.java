@@ -6,8 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.cloudwave.cycletrail.domain.CtText;
 import com.cloudwave.cycletrail.mapper.CtTextMapper;
-import com.cloudwave.fw.domain.AbstractEntity;
-import com.cloudwave.fw.service.AbstractService;
+import com.cloudwave.fwapp.base.service.AbstractService;
 
 @Service
 public class CtTextService extends AbstractService {
@@ -15,7 +14,7 @@ public class CtTextService extends AbstractService {
 	@Resource
 	private CtTextMapper ctTextMapper;
 
-	public AbstractEntity get(String id) {
+	public CtText get(String id) {
 		return this.ctTextMapper.get(id);
 	}
 	

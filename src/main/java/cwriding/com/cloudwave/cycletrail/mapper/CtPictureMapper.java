@@ -1,6 +1,6 @@
 package com.cloudwave.cycletrail.mapper;
 
-import com.cloudwave.cycletrail.domain.CtText;
+import com.cloudwave.cycletrail.domain.CtPicture;
 import com.cloudwave.fwapp.base.dao.Mapper;
 
 /**
@@ -11,11 +11,11 @@ import com.cloudwave.fwapp.base.dao.Mapper;
  * TODO
  */
 
-public interface CtTextMapper extends Mapper {
+public interface CtPictureMapper extends Mapper {
 
-	public CtText get(String id);
+	public CtPicture get(String id);
 
-	public void insert(CtText t);
+	public void insert(CtPicture p);
 	
 	
 	

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace该是TradeDetailMapper的完整限定名 -->
+<mapper namespace="com.cloudwave.fwapp.module.mapper.UserMapper">
+
+	<!--定义java bean的属性与数据库表的列之间的映射。type="Student"用到了configuration.xml中定义的别名 -->
+	<resultMap id="app_user_map" type="User">
+		<!--id映射 -->
+		<id property="id" column="id_" javaType="string" />
+		<!--普通属性映射 -->
+		<result property="name" column="name_" />
+	</resultMap>
+
+	<insert id="insert" parameterType="TradeDetail"
+		useGeneratedKeys="true" keyProperty="id" keyColumn="id_">
+		
+	</insert>
+	<sql id="app_user_cols">id_,content_,user_id</sql>
+	<!--与StudentMapper接口中的getById方法对应, 包括 方法名和参数类型. SQL语句中以“#{}”的形式引用参数 -->
+	<select id="get" parameterType="string" resultMap="app_user_map">
+		select <include refid="app_user_cols"/> 
+		from app_user u 
+		where u.id_ = #{id}
+	</select>
+
+	<select id="findGroupByDay" resultType="hashmap">
+		select DATE_FORMAT( tradetime_, '%Y%m%d' ) as date, count(id_) as ids,
+		sum(amount_) as amount, count(user_id) as uids from trade_detail
+		group by date(tradetime_);
+	</select>
+	<select id="findGroupByWeek" resultType="hashmap">
+		select DATE_FORMAT( tradetime_, '%Y%m%d' ) as date, count(id_) as ids,
+		sum(amount_) as amount, count(user_id) as uids from trade_detail
+		group by week(tradetime_);
+	</select>
+	<select id="findGroupByMonth" resultType="hashmap">
+		select DATE_FORMAT( tradetime_, '%Y%m%d' ) as date, count(id_) as ids,
+		sum(amount_) as amount, count(user_id) as uids from trade_detail
+		group by
+		month(tradetime_);
+	</select>
+
+
+</mapper>
