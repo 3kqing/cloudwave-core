@@ -1,6 +1,7 @@
 package com.cloudwave.cycletrail.action;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -15,6 +16,7 @@ import com.cloudwave.cycletrail.domain.CtText;
 import com.cloudwave.cycletrail.service.CtTextService;
 import com.cloudwave.fwapp.base.action.AbstractAction;
 import com.cloudwave.fwapp.module.domain.User;
+import com.cloudwave.fwapp.web.ResponseEntity;
 
 @Controller
 @RequestMapping("/text")
@@ -23,16 +25,19 @@ public class CtTextAction extends AbstractAction {
 	@Resource
 	private CtTextService ctTextService;
 	
-	
+	@ResponseBody
 	@RequestMapping(method = RequestMethod.POST,  value="/save")
-	public void save(@ModelAttribute("ctText") CtText t) {
+	public ResponseEntity save(@ModelAttribute("ctText") CtText t) {
+		ResponseEntity re = new ResponseEntity();
 		User u = new User();
 		u.setId("1");
 		
 		t.setId("11");
-//		t.setContent("测试文本");
+		t.setTime(new Date());
 		t.setUser(u);
 		this.ctTextService.save(t);
+		re.setCode(ResponseEntity.SAVE_SUCCESS);
+		return re;
 	}
 	
 	@RequestMapping(method = RequestMethod.GET,  value="/search")

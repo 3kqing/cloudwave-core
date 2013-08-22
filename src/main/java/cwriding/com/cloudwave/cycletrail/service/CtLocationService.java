@@ -1,5 +1,10 @@
 package com.cloudwave.cycletrail.service;
 
-public class CtLocationService {
+import org.springframework.stereotype.Service;
+
+import com.cloudwave.fwapp.base.service.AbstractService;
+
+@Service
+public class CtLocationService extends AbstractService {
 
 }

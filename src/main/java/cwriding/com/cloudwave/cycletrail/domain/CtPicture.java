@@ -3,7 +3,7 @@ package com.cloudwave.cycletrail.domain;
 import java.util.Date;
 
 import com.cloudwave.fwapp.base.domain.AbstractDomain;
-import com.cloudwave.fwapp.base.domain.FileEntity;
+import com.cloudwave.fwapp.module.domain.FileEntity;
 import com.cloudwave.fwapp.module.domain.User;
 
 /**

@@ -1,4 +1,4 @@
-package com.cloudwave.fw.utils;
+package com.cloudwave.fw.utils.security;
 
 import java.security.MessageDigest;
 

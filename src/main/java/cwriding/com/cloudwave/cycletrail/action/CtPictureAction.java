@@ -19,7 +19,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.cloudwave.cycletrail.domain.CtPicture;
 import com.cloudwave.cycletrail.service.CtPictureService;
 import com.cloudwave.fwapp.base.action.AbstractAction;
-import com.cloudwave.fwapp.base.domain.FileEntity;
+import com.cloudwave.fwapp.module.domain.FileEntity;
+import com.cloudwave.fwapp.module.service.FileEntityService;
 import com.cloudwave.fwapp.web.ResponseEntity;
 
 /**
@@ -36,6 +37,8 @@ public class CtPictureAction extends AbstractAction {
 	
 	@Resource
 	private CtPictureService ctPictureService;
+	@Resource
+	private FileEntityService fileEntityService;
 	
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.GET, value="/load")
@@ -60,10 +63,11 @@ public class CtPictureAction extends AbstractAction {
 		this.ctPictureService.save(pic);
 		
 		FileEntity fe = saveFile(file);
+		
         if (fe != null) {
             
             //保存 fe 到数据库
-        	
+        	this.fileEntityService.save(fe);
             rm.setResponseMessage(ResponseEntity.SUCCESS, "OK");
             return rm;
         } else {

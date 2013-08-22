@@ -8,10 +8,12 @@ package com.cloudwave.fwapp.web;
  */
 public interface Response {
 	public static final String SUCCESS = "success";
+	public static final String INFO = "info";
     public static final String WARN = "warn";
     public static final String FAIL = "fail";
     public static final String ERROR = "error";
     public static final String NONE = "none";
+    
     
     public static final String SAVE_SUCCESS = "save_success";
     public static final String SAVE_FAIL = "save_fail";

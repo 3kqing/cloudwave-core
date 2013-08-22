@@ -17,9 +17,10 @@
 
 	<insert id="insert" parameterType="CtText" >
 		insert into
-		ct_text(id_, content_, user_id)
-		values(#{id}, #{content}, #{user})
+		bt_text(id_, content_, time_, user_id)
+		values(#{id}, #{content}, #{time}, #{user.id})
 	</insert>
+	
 	<sql id="ct_text_cols">id_,content_,time_,user_id</sql>
 	<!--与StudentMapper接口中的getById方法对应, 包括 方法名和参数类型. SQL语句中以“#{}”的形式引用参数 -->
 	<select id="get" parameterType="string" resultMap="ct_text_map">

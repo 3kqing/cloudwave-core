@@ -37,11 +37,11 @@
     <context:annotation-config />
 
     <!-- 扫描annotation类, 自动注册bean, 过滤Service，Repository -->
-    <context:component-scan base-package="com.cloudwave.cycletrail" >
+    <!-- 如果不想把包的路径范围这么大, 那就只能手动把要注入的类写入到spring-fwapp.xml中去了 -->
+    <context:component-scan base-package="com.cloudwave" >
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 		<context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
 	</context:component-scan>
-
 
     <!-- 以静态变量保存ApplicationContext -->
     <!--<bean class="org.springside.modules.utils.spring.SpringContextHolder" lazy-init="false" />-->
@@ -79,13 +79,13 @@
  	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
-		<property name="typeAliasesPackage" value="com.cloudwave.fwapp.module;com.cloudwave.cycletrail.domain" />
+		<property name="typeAliasesPackage" value="com.cloudwave.fwapp.base.domain;com.cloudwave.fwapp.module.domain;com.cloudwave.cycletrail.domain" />
 		<!-- 显式指定Mapper文件位置 -->
 		<property name="mapperLocations" value="classpath*:/mapper/*Mapper.xml" />
 	</bean>
 	<!-- 扫描basePackage下所有以@MyBatisRepository标识的 接口-->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.cloudwave.cycletrail.mapper" />
+		<property name="basePackage" value="com.cloudwave.fwapp.module.mapper;com.cloudwave.cycletrail.mapper" />
 	</bean>
 
 

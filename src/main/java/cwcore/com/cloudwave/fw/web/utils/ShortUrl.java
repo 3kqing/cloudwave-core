@@ -1,6 +1,6 @@
 package com.cloudwave.fw.web.utils;
 
-import com.cloudwave.fw.utils.Encript;
+import com.cloudwave.fw.utils.security.Encript;
 
 /**
  * 短网址工具类

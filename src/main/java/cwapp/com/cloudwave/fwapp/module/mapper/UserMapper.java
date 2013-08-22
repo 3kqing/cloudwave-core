@@ -1,5 +1,7 @@
 package com.cloudwave.fwapp.module.mapper;
 
+import java.util.List;
+
 import com.cloudwave.fwapp.base.dao.Mapper;
 import com.cloudwave.fwapp.module.domain.User;
 
@@ -16,6 +18,15 @@ public interface UserMapper extends Mapper {
 	public User get(String id);
 
 	public void insert(User u);
+
+	/**
+	 * 根据邮箱查询用户
+	 * @author wangwl
+	 * @date 2013-8-22
+	 * @param email
+	 * @return
+	 */
+	public int findByEmail(String email);
 	
 	
 	

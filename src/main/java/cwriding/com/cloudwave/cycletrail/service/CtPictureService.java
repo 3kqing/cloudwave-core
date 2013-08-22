@@ -6,9 +6,10 @@ import org.springframework.stereotype.Service;
 
 import com.cloudwave.cycletrail.domain.CtPicture;
 import com.cloudwave.cycletrail.mapper.CtPictureMapper;
+import com.cloudwave.fwapp.base.service.AbstractService;
 
 @Service
-public class CtPictureService {
+public class CtPictureService extends AbstractService {
 
 	@Resource
 	private CtPictureMapper ctPictureMapper;

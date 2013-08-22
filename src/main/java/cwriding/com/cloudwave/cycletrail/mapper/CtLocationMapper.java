@@ -1,5 +1,7 @@
 package com.cloudwave.cycletrail.mapper;
 
-public interface CtLocationMapper {
+import com.cloudwave.fwapp.base.dao.Mapper;
+
+public interface CtLocationMapper extends Mapper {
 
 }

@@ -12,7 +12,12 @@ public class ResponseEntity implements Response {
     private String info;
     private Object data;
 
-
+    /**
+     * 默认返回码为: FAIL 失败
+     */
+    public ResponseEntity() {
+        this.code = ResponseEntity.FAIL;
+    }
     public ResponseEntity(String code) {
         this.code = code;
     }
