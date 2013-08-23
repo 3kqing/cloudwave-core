@@ -1,0 +1,46 @@
+package com.cloudwave.cycletrail.domain;
+
+import java.util.Date;
+
+import com.cloudwave.fwapp.base.domain.AbstractDomain;
+import com.cloudwave.fwapp.module.domain.User;
+
+/**
+ * 评论  实体类
+ * @author wangwl
+ * @date 2013-8-23
+ */
+public class CtDiscuss extends AbstractDomain {
+	private static final long serialVersionUID = -4625028862529199355L;
+	
+	private CtTravelMessage travelMessage;
+	private String content;
+	private User user;
+	private Date sendTime;
+	
+	
+	public CtTravelMessage getTravelMessage() {
+		return travelMessage;
+	}
+	public void setTravelMessage(CtTravelMessage travelMessage) {
+		this.travelMessage = travelMessage;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public Date getSendTime() {
+		return sendTime;
+	}
+	public void setSendTime(Date sendTime) {
+		this.sendTime = sendTime;
+	}
+}

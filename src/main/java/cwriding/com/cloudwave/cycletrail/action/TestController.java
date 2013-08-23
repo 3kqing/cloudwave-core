@@ -1,4 +1,4 @@
-package com.cloudwave.fwapp.base.action;
+package com.cloudwave.cycletrail.action;
 
 import java.io.File;
 import java.io.IOException;

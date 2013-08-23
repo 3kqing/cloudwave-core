@@ -17,21 +17,23 @@ public class ResponseEntity implements Response {
      */
     public ResponseEntity() {
         this.code = ResponseEntity.FAIL;
+        this.data = "";
     }
     public ResponseEntity(String code) {
         this.code = code;
+        this.data = "";
     }
     public ResponseEntity(String code, String info) {
         this.code = code;
         this.info = info;
+        this.data = "";
     }
 
     public void setResponseMessage(String code, String info) {
         this.code = code;
         this.info = info;
+        this.data = "";
     }
-
-
 
 
     public String getCode() {
@@ -40,6 +42,30 @@ public class ResponseEntity implements Response {
 
     public void setCode(String code) {
         this.code = code;
+        
+        if (SUCCESS.equals(code)) {
+        	this.info = "操作成功!";
+        } else if (WARN.equals(code)) {
+        	this.info = "警告!";
+        } else if (FAIL.equals(code)) {
+        	this.info = "操作失败!";
+        } else if (ERROR.equals(code)) {
+        	this.info = "错误!";
+        } else if (NONE.equals(code)) {
+        	this.info = "";
+        } else if (SAVE_SUCCESS.equals(code)) {
+        	this.info = "保存成功!";
+        } else if (SAVE_FAIL.equals(code)) {
+        	this.info = "保存失败!";
+        } else if (UPDATE_SUCCESS.equals(code)) {
+        	this.info = "更新成功!";
+        } else if (UPDATE_FAIL.equals(code)) {
+        	this.info = "更新失败!";
+        } else if (DELETE_SUCCESS.equals(code)) {
+        	this.info = "删除成功!";
+        } else if (DELETE_FAIL.equals(code)) {
+        	this.info = "删除失败!";
+        }
     }
 
     public String getInfo() {

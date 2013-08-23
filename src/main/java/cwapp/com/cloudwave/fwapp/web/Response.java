@@ -7,6 +7,7 @@ package com.cloudwave.fwapp.web;
  * To change this template use File | Settings | File Templates.
  */
 public interface Response {
+	
 	public static final String SUCCESS = "success";
 	public static final String INFO = "info";
     public static final String WARN = "warn";
@@ -20,5 +21,6 @@ public interface Response {
     public static final String UPDATE_SUCCESS = "update_success";
     public static final String UPDATE_FAIL = "update_fail";
     public static final String DELETE_SUCCESS = "delete_success";
-	
+    public static final String DELETE_FAIL = "delete_fail";
+    
 }

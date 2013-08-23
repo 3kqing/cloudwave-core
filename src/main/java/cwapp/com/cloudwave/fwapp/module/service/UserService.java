@@ -1,10 +1,7 @@
 package com.cloudwave.fwapp.module.service;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
-import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
 
 import com.cloudwave.fwapp.base.service.AbstractService;
