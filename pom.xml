@@ -181,8 +181,6 @@
 		 -->
 
 
-
-
 		<!-- 
 		<dependency>
 			<groupId>org.springside</groupId>
@@ -348,16 +346,6 @@
 			<version>2.2.2</version>
 		</dependency>
 		
-
-		<!-- Logging -->
-		<!-- 
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>${logback.version}</version>
-			<scope>runtime</scope>
-		</dependency>
-		 -->
 		<dependency>
 		    <!-- Required by commons-fileupload -->
 		    <groupId>commons-io</groupId>
@@ -386,6 +374,31 @@
 			<artifactId>commons-codec</artifactId>
 			<version>1.8</version>
 		</dependency>
+		<!-- Logging -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-access</artifactId>
+			<version>${logback.version}</version>
+		</dependency>
+            
+		<!-- 
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.5</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.5</version>
+		</dependency>
+		 -->		
 		
 		<!-- 来自阿里巴巴开源社区的JSON序列化和反序列化工具 -->
 		<dependency>
@@ -428,11 +441,13 @@
 		    <version>1.5.7</version>
 		</dependency>
 		<!-- Javolution 提供一个高性的Java集合（collection ）类库和一些实用的工具类 -->
+		<!-- 
 		<dependency>
         	<groupId>org.javolution</groupId>
         	<artifactId>javolution-core-java</artifactId>
         	<version>6.0.0</version>
         </dependency>
+		 -->
 		<!-- 
 		验证码生成库
 		https://code.google.com/p/kaptcha/
@@ -445,8 +460,8 @@
         </dependency>
         
         <!-- 
-		        用于解析图片EXIF信息
-		        其中metadata-extractor未受Maven管理
+        用于解析图片EXIF信息
+        其中metadata-extractor未受Maven管理
          -->
         <dependency>
             <groupId>com.google.code.metadata</groupId>
@@ -464,10 +479,14 @@
 	<build>
 		<finalName>cloudwave</finalName>
 		<defaultGoal>compile</defaultGoal>
+		<!-- <directory>target/jar</directory>  -->
 		<!-- 资源目录 -->
-		<!-- <sourceDirectory>${basedir}/src/main/java</sourceDirectory> -->
+		<!-- <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
+			 <testSourceDirectory>${basedir}/src/test</testSourceDirectory>
+		 -->
 		<!-- 输出目录 -->
 		<outputDirectory>${basedir}/src/main/webapp/WEB-INF/classes</outputDirectory>
+		<testOutputDirectory>${basedir}/src/main/webapp/WEB-INF/classes</testOutputDirectory>
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>

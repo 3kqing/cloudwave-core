@@ -6,6 +6,8 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +24,9 @@ import com.cloudwave.fwapp.web.ResponseEntity;
 @Controller
 @RequestMapping("/travelmessage")
 public class CtTravleMessageAction extends AbstractAction {
-
+	//定义一个全局的记录器，通过LoggerFactory获取
+    private final static Logger logger = LoggerFactory.getLogger(CtTravleMessageAction.class); 
+    
 	@Resource
 	private CtTravelMessageService ctTravelMessageService;
 	

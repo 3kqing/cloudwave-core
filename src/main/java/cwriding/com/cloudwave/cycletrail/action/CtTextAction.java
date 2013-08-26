@@ -26,12 +26,13 @@ public class CtTextAction extends AbstractAction {
 	private CtTextService ctTextService;
 	
 	@ResponseBody
-	@RequestMapping(method = RequestMethod.POST,  value="/save")
-	public ResponseEntity save(@ModelAttribute("ctText") CtText t) {
+	@RequestMapping(method = RequestMethod.POST,  value="/add")
+	public ResponseEntity add(@ModelAttribute("ctText") CtText t) {
 		ResponseEntity re = new ResponseEntity();
 		User u = new User();
 		u.setId("1");
 		
+		System.out.println("接收的文本："+t.getContent());
 		t.setId("11");
 		t.setTime(new Date());
 		t.setUser(u);
