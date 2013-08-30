@@ -76,38 +76,5 @@ public class CtPictureAction extends AbstractAction {
         }
     }
 	
-	protected FileEntity saveFile(MultipartFile file) {
-		if (!file.isEmpty()) {
-			FileEntity fe = new FileEntity();
-			
-            String contentType = file.getContentType();
-            String type = file.getName().substring(file.getName().indexOf(".")+1, file.getName().length());
-            
-            String filename = file.getOriginalFilename();
-            String newfilename = "F:/Temp/"+ UUID.randomUUID()
-                    + filename.substring(filename.lastIndexOf("."));
-            
-            fe.setName(filename);
-            fe.setSaveName(newfilename);
-            fe.setContentType(contentType);
-            fe.setType(type);
-            fe.setUploadTime(new Date());
-            fe.setMd5("");
-            
-            File newfile = new File(newfilename);
-            try {
-				file.transferTo(newfile);
-			} catch (IllegalStateException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-            return fe;
-		} else {
-			return null;
-		}
-	}
 	
 }

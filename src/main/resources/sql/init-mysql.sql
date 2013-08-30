@@ -13,10 +13,11 @@ create table if not exists app_user
 create table if not exists ct_travel_message
 (
 	id_ char(36) primary key,
-	title_ varchar(50) not null,
-	text_ varchar(500) not null,
-	path_ varchar(100) not null,
+	title_ varchar(50),
+	text_ varchar(500),
+	path_ varchar(100),
 	sendtime_ datetime not null,
+	timestamp_ long not null,
 	travelnotes_id char(36),
 	location_id char(36),
 	file_id char(36),

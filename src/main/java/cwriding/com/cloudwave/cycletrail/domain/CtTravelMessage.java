@@ -23,7 +23,8 @@ public class CtTravelMessage extends AbstractDomain {
 	private String text;
 	
 	private Date sendTime;
-	
+	private long timestamp;  //时间戳
+	 
 	private CtTravelNotes travelNotes;
 	private CtLocation location;
 	private User user;
@@ -64,6 +65,12 @@ public class CtTravelMessage extends AbstractDomain {
 	}
 	public void setSendTime(Date sendTime) {
 		this.sendTime = sendTime;
+	}
+	public long getTimestamp() {
+		return timestamp;
+	}
+	public void setTimestamp(long timestamp) {
+		this.timestamp = timestamp;
 	}
 	public CtTravelNotes getTravelNotes() {
 		return travelNotes;

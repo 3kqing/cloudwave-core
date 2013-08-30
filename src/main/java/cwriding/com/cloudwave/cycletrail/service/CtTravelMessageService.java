@@ -1,5 +1,6 @@
 package com.cloudwave.cycletrail.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -24,7 +25,7 @@ public class CtTravelMessageService extends AbstractService {
 		this.ctTravelMessageMapper.insert(tm);
 	}
 
-	public List<CtTravelMessage> load(int count) {
+	public List<CtTravelMessage> load(int count, Date date) {
 		return this.ctTravelMessageMapper.load(count);
 	}
 	

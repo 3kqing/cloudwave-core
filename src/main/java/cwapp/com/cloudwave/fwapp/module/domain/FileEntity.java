@@ -9,6 +9,7 @@ public class FileEntity extends AbstractEntity {
 	
 	private String name;
 	private String saveName;
+	private String savePath;
 	private String type;
 	private String contentType;
 	private String path;
@@ -28,6 +29,12 @@ public class FileEntity extends AbstractEntity {
 	}
 	public void setSaveName(String saveName) {
 		this.saveName = saveName;
+	}
+	public String getSavePath() {
+		return savePath;
+	}
+	public void setSavePath(String savePath) {
+		this.savePath = savePath;
 	}
 	public String getType() {
 		return type;
