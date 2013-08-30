@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cloudwave.fw.utils.security.AesEncrypt;
 import com.cloudwave.fw.utils.security.MD5Encrypt;
+import com.cloudwave.fw.utils.security.RegexUtils;
 import com.cloudwave.fwapp.base.action.AbstractAction;
 import com.cloudwave.fwapp.module.domain.User;
 import com.cloudwave.fwapp.module.service.UserService;
@@ -68,7 +69,7 @@ public class SignAction extends AbstractAction {
 			return re;
 		}
 		
-		// 3. 保存登录信息
+		// 3. 异步记录登录信息-->可能用于用户行为分析
 		
 		
 		// 4. 返回用户信息
@@ -80,24 +81,49 @@ public class SignAction extends AbstractAction {
 	@RequestMapping(method = RequestMethod.POST,  value="/signup")
 	public ResponseEntity signUp(@PathVariable("email") String email
 			, @PathVariable("password") String password
-			, @PathVariable("verifycode") String verifycode) {
+			, @PathVariable("repwd") String repwd) {
 		ResponseEntity re = new ResponseEntity();
+		// 1. 验证参数合法性
+		if (StringUtils.isEmpty(email)) {
+			re.setResponseMessage(ResponseEntity.WARN, "邮箱不能为空!");
+			return re;
+		}
+		if (!RegexUtils.isEmail(email)) {
+			re.setResponseMessage(ResponseEntity.WARN, "非法邮箱格式!");
+			return re;
+		}
+		if (StringUtils.isEmpty(password)) {
+			re.setResponseMessage(ResponseEntity.WARN, "请填写密码!");
+			return re;
+		}
+		if (StringUtils.isEmpty(repwd)) {
+			re.setResponseMessage(ResponseEntity.WARN, "请填写确认密码!");
+			return re;
+		}
+		if (!password.equals(repwd)) {
+			re.setResponseMessage(ResponseEntity.WARN, "两次输入的密码不同,请重新输入!");
+			return re;
+		}
 		
-		// 1. 验证邮箱是否存在
+		
 		boolean existsEmail = this.userService.checkEmail(email);
 		if (existsEmail) {
-			re.setResponseMessage(ResponseEntity.INFO, "此邮箱已被注册,请换一个试试!");
+			re.setResponseMessage(ResponseEntity.WARN, "此邮箱已被注册,请换一个试试!");
 			return re;
 		}
 		
 		
 		User u = new User();
 		u.setEmail(email);
+		u.setName(email);  // 用户名默认使用用户邮箱, 用户登录后提示用户修改
 		String savepwd = MD5Encrypt.encrypt(password);
 		u.setPassword(savepwd);
 		
+		// 这里应该用切面编程和异步事件任务把详细注册信息写入到统计数据库
+		
 		this.userService.save(u);
 		
+		re.setCode(ResponseEntity.SAVE_SUCCESS);
 		return re;
 	}
 	

@@ -26,3 +26,5 @@ results
 *.jar
 *.war
 *.ear
+/build
+/target

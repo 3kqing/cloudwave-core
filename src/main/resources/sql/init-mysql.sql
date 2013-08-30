@@ -7,8 +7,17 @@ create table if not exists app_user
 	name_ varchar(50),
 	email_ varchar(50) not null,
 	password_ varchar(64) not null,
-	create_time_ datetime
+	createtime_ datetime
 );
+
+create table if not exists app_user_sign_info
+(
+	id_ char(36) primary key,
+	signtime_ datetime not null,
+	signtype_ TINYINT(1) not null,
+	user_id char(36) not null
+);
+
 
 create table if not exists ct_travel_message
 (
@@ -23,6 +32,17 @@ create table if not exists ct_travel_message
 	user_id int not null
 );
 
+create table if not exists ct_picture
+(
+	id_ char(36) primary key,
+	title_ varchar(100),
+	desc_ varchar(500),
+	time_ datetime not null,
+	path_ varchar(200) not null,
+	user_id char(36)
+);
+
+
 create table if not exists ct_text
 (
 	id_ char(36) primary key,
@@ -30,3 +50,7 @@ create table if not exists ct_text
 	time_ datetime not null,
 	user_id int not null
 );
+
+
+
+

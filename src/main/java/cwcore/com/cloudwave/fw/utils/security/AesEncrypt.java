@@ -169,8 +169,8 @@ public class AesEncrypt {
 	}
 
 	public static void main(String[] args) throws UnsupportedEncodingException {
-		String content = "test";
-		String password = "12345678";
+		String content = "Message";
+		String password = "Secret Passphrase";
 //		// 加密
 //		System.out.println("加密前：" + content);
 //		byte[] encryptResult = encrypt(content, password);
