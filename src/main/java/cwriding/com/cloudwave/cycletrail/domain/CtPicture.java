@@ -23,7 +23,7 @@ public class CtPicture extends AbstractDomain {
 	private String desc;
 	private String path;
 	
-	private Date time;
+	private Date sendTime;
 	
 	private CtTravelNotes travelNotes;
 	private CtLocation location;
@@ -56,11 +56,11 @@ public class CtPicture extends AbstractDomain {
 	public void setPath(String path) {
 		this.path = path;
 	}
-	public Date getTime() {
-		return time;
+	public Date getSendTime() {
+		return sendTime;
 	}
-	public void setTime(Date time) {
-		this.time = time;
+	public void setSendTime(Date sendTime) {
+		this.sendTime = sendTime;
 	}
 	public CtTravelNotes getTravelNotes() {
 		return travelNotes;

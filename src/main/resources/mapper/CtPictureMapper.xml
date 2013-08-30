@@ -13,14 +13,14 @@
 		<result property="title" column="title_" />
 		<result property="desc" column="desc_" />
 		<result property="path" column="path_" />
-		<result property="time" column="time_" />
+		<result property="sendtime" column="sendtime_" />
 		<!-- <result property="user" column="user_id" /> -->
 	</resultMap>
 
 	<insert id="insert" parameterType="CtPicture" >
 		insert into
 		ct_picture(id_, title_, desc_, path_, time_, user_id)
-		values(#{id}, #{title}, #{desc}, #{path}, #{time}, #{user})
+		values(#{id}, #{title}, #{desc}, #{path}, #{sendtime}, #{user})
 	</insert>
 	<sql id="ct_picture_cols">id_,title_,desc_,path_,time_,user_id</sql>
 	<select id="get" parameterType="string" resultMap="ct_picture_map">
