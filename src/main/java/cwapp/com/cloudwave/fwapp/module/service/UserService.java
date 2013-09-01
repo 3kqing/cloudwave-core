@@ -27,9 +27,8 @@ public class UserService extends AbstractService {
 		return null;
 	}
 
-	public User getByNameOrEmail(String username) {
-		// TODO Auto-generated method stub
-		return null;
+	public User getByAccountOrEmail(String accountOrEmail) {
+		return this.userMapper.getByAccountOrEmail(accountOrEmail);
 	}
 
 	public boolean checkEmail(String email) {

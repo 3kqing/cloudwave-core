@@ -4,7 +4,6 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,56 +30,58 @@ public class SignAction extends AbstractAction {
 	 */
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.POST,  value="/signin")
-	public ResponseEntity signIn(@PathVariable("info") String info
-			, @PathVariable("key") String key) {
+	public ResponseEntity signin(String account, String ciphertext) {
 		ResponseEntity re = new ResponseEntity();
-		// 1. 解密登录信息
-		if (StringUtils.isEmpty(info) || StringUtils.isEmpty(key)) {
+		// 1. 检查登录信息
+		if (StringUtils.isEmpty(account) || StringUtils.isEmpty(ciphertext)) {
 			re.setResponseMessage(ResponseEntity.INFO, "未获取到认证信息!");
 			return re;
 		}
-		byte[] decryptFrom = AesEncrypt.parseHexStr2Byte(info);
-		byte[] decryptResult = AesEncrypt.decrypt(decryptFrom, key);
-		String user = new String(decryptResult);
 		
-		// 2.1 验证信息完整性
-		String[] userarr = user.split("#");
-		if (userarr.length != 2) {
-			re.setResponseMessage(ResponseEntity.INFO, "非法认证信息!");
-			return re;
-		}
-		String signinfo = userarr[0];
-		String password = userarr[1];
+		// 2. 获取用户信息
+		User u = this.userService.getByAccountOrEmail(account);
 		
-		if (StringUtils.isEmpty(signinfo)) {
-			re.setResponseMessage(ResponseEntity.INFO, "用户名不能为空!");
-			return re;
-		}
-		if (StringUtils.isEmpty(password)) {
-			re.setResponseMessage(ResponseEntity.INFO, "密码不能为空!");
-			return re;
-		}
-		
-		// 2.2 验证用户是否存在
-		User u = this.userService.getByNameOrEmail(signinfo);
-		
-		if (u == null || !password.equals(u.getPassword())) {
+		if (u == null) {
 			re.setResponseMessage(ResponseEntity.INFO, "用户名或密码错误!");
 			return re;
 		}
 		
+		// 3. 解密登录信息
+		byte[] decryptFrom = AesEncrypt.parseHexStr2Byte(ciphertext);
+//		byte[] decryptResult = AesEncrypt.decrypt(decryptFrom, u.getPassword());
+//		String valueResult = new String(decryptResult);
+		
+		AesEncrypt ae = new AesEncrypt(u.getPassword());
+		String valueResult = ae.decrypt(decryptFrom);
+		System.out.println("解密结果："+valueResult);
+		
+		if (StringUtils.isEmpty(valueResult)) {
+			re.setResponseMessage(ResponseEntity.INFO, "非法认证信息!");
+			return re;
+		}
+		
+		if (!valueResult.equals(account)) {
+			re.setResponseMessage(ResponseEntity.INFO, "用户名或密码错误!");
+			return re;
+		}
+		
+		
 		// 3. 异步记录登录信息-->可能用于用户行为分析
 		
 		
-		// 4. 返回用户信息
+		// 4. 生成token，并返回用户信息
+		
+		
+		re.setData(u);
 		
 		return re;
 	}
 	
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.POST,  value="/signup")
-	public ResponseEntity signUp(@PathVariable("email") String email
-			, @PathVariable("password") String password) {
+//	public ResponseEntity signup(@PathVariable("email") String email
+//			, @PathVariable("password") String password) {  //这样写总是返回 400 错误！
+	public ResponseEntity signup(String email, String password) {
 		ResponseEntity re = new ResponseEntity();
 		// 1. 验证参数合法性
 		if (StringUtils.isEmpty(email)) {
@@ -113,7 +114,7 @@ public class SignAction extends AbstractAction {
 		
 		this.userService.save(u);
 		
-		re.setCode(ResponseEntity.SAVE_SUCCESS);
+		re.setCode(ResponseEntity.SUCCESS);
 		return re;
 	}
 	

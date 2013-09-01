@@ -82,6 +82,10 @@ public class ResponseEntity implements Response {
 
     public void setData(Object data) {
         this.data = data;
+        if (data != null) {
+        	this.code = SUCCESS;
+            this.info = "获取数据成功!";
+        }
     }
     public void setData(Object data, String code) {
         this.data = data;

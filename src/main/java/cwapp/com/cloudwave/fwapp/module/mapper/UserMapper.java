@@ -27,6 +27,14 @@ public interface UserMapper extends Mapper {
 	 * @return
 	 */
 	public int findByEmail(String email);
+
+	/**
+	 * 根据用户名和邮箱查询用户
+	 * 这里在业务上来讲不能返回多条数据，但考虑到尽量少的抛出异常此处是否要用集合来接受数据呢？
+	 * @param accountOrEmail
+	 * @return
+	 */
+	public User getByAccountOrEmail(String accountOrEmail);
 	
 	
 	

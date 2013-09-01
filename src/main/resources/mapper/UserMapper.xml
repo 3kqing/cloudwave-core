@@ -23,7 +23,7 @@
 	<sql id="app_user_cols">id_,name_,email_,password_</sql>
 	<!--与StudentMapper接口中的getById方法对应, 包括 方法名和参数类型. SQL语句中以“#{}”的形式引用参数 -->
 	<select id="get" parameterType="string" resultMap="app_user_map">
-		select <include refid="app_user_cols"/>
+		select <include refid="app_user_cols"/> 
 		from app_user u 
 		where u.id_ = #{id}
 	</select>
@@ -34,6 +34,13 @@
 		from app_user u 
 		where u.email_ = #{email}
 	</select>
+	
+	<select id="getByAccountOrEmail" parameterType="string" resultMap="app_user_map">
+		select <include refid="app_user_cols"/> 
+		from app_user u 
+		where u.email_ = #{email} or u.name_ = #{name}
+	</select>
+	
 	
 	<select id="findGroupByDay" resultType="hashmap">
 		select DATE_FORMAT( tradetime_, '%Y%m%d' ) as date, count(id_) as ids,

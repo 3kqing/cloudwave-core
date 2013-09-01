@@ -3,7 +3,7 @@ create database if not exists biketrail default character set utf8;
 
 create table if not exists app_user
 (
-	id_ char(36) primary key,
+	id_ bigint(20) primary key auto_increment,
 	name_ varchar(50),
 	email_ varchar(50) not null,
 	password_ varchar(64) not null,
@@ -12,7 +12,7 @@ create table if not exists app_user
 
 create table if not exists app_user_sign_info
 (
-	id_ char(36) primary key,
+	id_ bigint(20) primary key auto_increment,
 	signtime_ datetime not null,
 	signtype_ TINYINT(1) not null,
 	user_id char(36) not null
@@ -21,7 +21,7 @@ create table if not exists app_user_sign_info
 
 create table if not exists ct_travel_message
 (
-	id_ char(36) primary key,
+	id_ bigint(20) primary key auto_increment,
 	title_ varchar(50) not null,
 	text_ varchar(500) not null,
 	path_ varchar(100) not null,
