@@ -123,6 +123,13 @@
 			<artifactId>spring-jms</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.2</version>
+			<scope>test</scope>
+		</dependency>
 		<!-- 对Junit等测试框架的简单封装 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -245,12 +252,6 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.8.2</version>
-			<scope>test</scope>
-		</dependency>
 
 		<!-- NIO Server -->
 		<dependency>
