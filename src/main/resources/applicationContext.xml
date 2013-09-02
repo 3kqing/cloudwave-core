@@ -106,6 +106,7 @@
 	
     <!--使用annotation定义事务, 支持dao事务注解-->
     <tx:annotation-driven transaction-manager="txManager" proxy-target-class="true" />
+	<!-- <tx:jta-transaction-manager /> -->
 	
 	<!-- 定义aspectj -->
 	<aop:aspectj-autoproxy proxy-target-class="true"/>
