@@ -78,12 +78,12 @@ public class CtTravleMessageAction extends AbstractAction {
 	}
 	
 	@ResponseBody
-	@RequestMapping(method = RequestMethod.GET,  value="/loadnewest")
-	public ResponseEntity loadNewest(@PathVariable("date") Date time) {
+	@RequestMapping(method = RequestMethod.GET,  value="/newest")
+	public ResponseEntity loadNewest() {
 		ResponseEntity re = new ResponseEntity();
 		int count = 20;
 		
-		List<CtTravelMessage> tmList = this.ctTravelMessageService.load(count, time);
+		List<CtTravelMessage> tmList = this.ctTravelMessageService.load(count);
 		if (CollectionUtils.isNotEmpty(tmList)) {
 			re.setData(tmList, ResponseEntity.SUCCESS);
 		} else {

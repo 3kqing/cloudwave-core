@@ -1,5 +1,6 @@
 package com.cloudwave.cycletrail.mapper;
 
+import java.util.Date;
 import java.util.List;
 
 import com.cloudwave.cycletrail.domain.CtTravelMessage;
@@ -12,5 +13,7 @@ public interface CtTravelMessageMapper extends Mapper {
 	public void insert(CtTravelMessage tm);
 
 	public List<CtTravelMessage> load(int count);
+
+	public List<CtTravelMessage> load(int count, Date date);
 	
 }

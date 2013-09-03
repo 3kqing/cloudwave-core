@@ -25,8 +25,11 @@ public class CtTravelMessageService extends AbstractService {
 		this.ctTravelMessageMapper.insert(tm);
 	}
 
-	public List<CtTravelMessage> load(int count, Date date) {
+	public List<CtTravelMessage> load(int count) {
 		return this.ctTravelMessageMapper.load(count);
+	}
+	public List<CtTravelMessage> load(int count, Date date) {
+		return this.ctTravelMessageMapper.load(count, date);
 	}
 	
 }
