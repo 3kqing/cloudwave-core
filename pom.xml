@@ -11,17 +11,59 @@
 
 	<!-- 属性 -->
 	<properties>
-		<!-- Plugin的属性定义 -->
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- Generic properties -->
 		<jdk.version>1.7</jdk.version>
-		<spring.version>3.2.3.RELEASE</spring.version>
+		<java.version>1.7</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<!-- Java EE dependencies -->
+		<jsp.version>2.2</jsp.version>
+		<jstl.version>1.2</jstl.version>
+		<servlet.version>2.5</servlet.version>
+		<jaxb-impl.version>2.2.7</jaxb-impl.version>
+				
+		<!-- 框架 -->
+		<spring.version>3.2.4.RELEASE</spring.version>
 		<spring.rest>1.1.0.M1</spring.rest>
 		<mybatis.version>3.2.2</mybatis.version>
-		<springside.version>4.1.1-SNAPSHOT</springside.version>
-		<jackson.version>2.2.2</jackson.version>
+		
+		<!-- AOP -->
+		<aspectj.version>1.7.3</aspectj.version>
+		
+		<!-- Database access -->
+		<tomcat-jdbc.version>7.0.42</tomcat-jdbc.version>
+		<ehcache.version>2.7.2</ehcache.version>
+		<hsqldb.version>2.3.0</hsqldb.version>
+		
+		<!-- Test -->
+		<junit.version>4.11</junit.version>
+		<hamcrest.version>1.3</hamcrest.version>
+		
+		<!-- Logging -->
 		<logback.version>1.0.13</logback.version>
+		<slf4j.version>1.7.5</slf4j.version>
+		
+		<!-- 任务调度 -->
 		<quartz.version>2.2.0</quartz.version>
+		
+		<!-- 工具 -->
+		<fastjson.version>1.1.32</fastjson.version>
+		<jackson.version>2.2.2</jackson.version>
 		<kaptcha.version>2.3.2</kaptcha.version>
+		
+		<!-- Dates -->
+		<jodatime.version>2.3</jodatime.version>
+		<jodatime-jsptags.version>1.1.1</jodatime-jsptags.version>
+		
+		<!-- RSS -->
+		<rome.version>1.0</rome.version>
+		
+		<!-- Web dependencies -->
+		<webjars-bootstrap.version>2.3.0</webjars-bootstrap.version>
+		<webjars-jquery-ui.version>1.9.2</webjars-jquery-ui.version>
+		<webjars-jquery.version>1.9.0</webjars-jquery.version>
+		<dandelion.datatables.version>0.8.14</dandelion.datatables.version>
 	</properties>
 	<!-- 项目依赖 -->
 	<!-- http://search.maven.org/ -->
@@ -127,7 +169,14 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.8.2</version>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- used by Spring MVC Test framework -->
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-library</artifactId>
+			<version>${hamcrest.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<!-- 对Junit等测试框架的简单封装 -->
@@ -238,20 +287,31 @@
 			<version>3.0.0</version>
 		</dependency>
 		 -->
-
+		<!-- 
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		 -->
+		
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>${jstl.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
-			<version>2.5</version>
+			<version>${servlet.version}</version>
+			<scope>provided</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>jsp-api</artifactId>
-			<version>2.1</version>
+			<version>${jsp.version}</version>
 			<scope>provided</scope>
 		</dependency>
-
 
 		<!-- NIO Server -->
 		<dependency>
@@ -310,15 +370,10 @@
 		<dependency>
 			<groupId>net.sf.ehcache</groupId>
 			<artifactId>ehcache</artifactId>
-			<version>2.7.2</version>
+			<version>${ehcache.version}</version>
 		</dependency>
 
-
-		<dependency>
-			<groupId>jstl</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
-		</dependency>
+		<!-- 使用了spring-aspects就不用这两个了,具体还不清楚,可能是有冲突的 -->
 		 <!--
 		<dependency>
 			<groupId>org.aspectj</groupId>
@@ -404,11 +459,18 @@
         
 		
 		
-		<!-- Logging -->
+		<!-- Logging with SLF4J & LogBack -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+			<scope>compile</scope>
+		</dependency>
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 			<version>${logback.version}</version>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
@@ -417,12 +479,6 @@
 		</dependency>
             
 		<!-- 
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.7.5</version>
-		</dependency>
-		
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
@@ -434,7 +490,7 @@
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
-			<version>1.1.32</version>
+			<version>${fastjson.version}</version>
 		</dependency>
 		
 
@@ -461,6 +517,19 @@
 			<artifactId>jackson-module-jaxb-annotations</artifactId>
 			<version>${jackson.version}</version>
 		</dependency>
+		
+		<!-- 日期和时间才处理工具,用户代替JDK自带时间类 -->
+		<dependency>
+		    <groupId>joda-time</groupId>
+		    <artifactId>joda-time</artifactId>
+		    <version>${jodatime.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time-jsptags</artifactId>
+			<version>${jodatime-jsptags.version}</version>
+		</dependency>
+            
 		<!-- 
 		Bean验证框架
 		http://www.stripesframework.org/display/stripes/Home
@@ -479,9 +548,9 @@
         </dependency>
 		 -->
 		<!-- 
-		验证码生成库
-		https://code.google.com/p/kaptcha/
-		作者拒绝受Maven管理, 所以需要在本地版本库添加kaptcha-2.3.2.jar
+			验证码生成库
+			https://code.google.com/p/kaptcha/
+			作者拒绝受Maven管理, 所以需要在本地版本库添加kaptcha-2.3.2.jar
 		 -->
 		<dependency>
             <groupId>com.google.code.kaptcha</groupId>
@@ -490,8 +559,8 @@
         </dependency>
         
         <!-- 
-        用于解析图片EXIF信息
-        其中metadata-extractor未受Maven管理
+		        用于解析图片EXIF信息
+		        其中metadata-extractor未受Maven管理
          -->
         <dependency>
             <groupId>com.google.code.metadata</groupId>
@@ -767,18 +836,6 @@
 	<repositories>
 		<!-- 
 		<repository>
-			<id>maven-repo</id>
-			<name>Apache Maven Resources
-			</name>
-			<url>http://repo1.maven.org/maven2/org/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-		<repository>
 			<id>springsource-repo</id>
 			<name>SpringSource Repository
 			</name>
@@ -798,13 +855,19 @@
 		<repository>
 	        <id>mvnrepository-repo</id>
 	        <name>mvnrepository-Repository</name>
-	        <url>http://mvnrepository.com/</url>
+	        <url>http://mvnrepository.com</url>
 	    </repository>
 	    <repository>
 	        <id>fusesource</id>
 	        <name>fusesource-opensource</name>
 	        <url>http://repo.fusesource.com</url>
 	    </repository>
+	    <!-- Springframework 版本库 -->
+	    <repository>
+		    <id>springsource-repo</id>
+		    <name>SpringSource Repository</name>
+		    <url>http://repo.springsource.org/release</url>
+		</repository>
 	    <!-- 阿里巴巴开源版本库 -->
 	    <repository>
 	        <id>alibaba-opensource</id>

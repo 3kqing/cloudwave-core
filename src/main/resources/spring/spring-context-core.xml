@@ -34,6 +34,10 @@
         </property>
     </bean>
 
+	<!-- Configurer that replaces ${...} placeholders with values from a properties file -->
+    <!-- (in this case, JDBC-related settings for the JPA EntityManager definition below) -->
+    <!-- <context:property-placeholder location="classpath:spring/data-access.properties" system-properties-mode="OVERRIDE"/> -->
+    
     <context:annotation-config />
 
     <!-- 扫描annotation类, 自动注册bean, 过滤Service，Repository -->
@@ -104,7 +108,7 @@
 		<property name="dataSource" ref="quartzDataSource" />
 	</bean>
 	
-    <!--使用annotation定义事务, 支持dao事务注解-->
+    <!--允许扫描@Transactional注解的事务, 支持dao事务注解-->
     <tx:annotation-driven transaction-manager="txManager" proxy-target-class="true" />
 	<!-- <tx:jta-transaction-manager /> -->
 	

@@ -67,7 +67,10 @@ public class ResponseEntity implements Response {
         	this.info = "删除失败!";
         }
     }
-
+    public void setCode(String code, String info) {
+    	this.code = code;
+    	this.info = info;
+    }
     public String getInfo() {
         return info;
     }

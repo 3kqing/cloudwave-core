@@ -4,18 +4,13 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.validation.BindingResult;
 
 import com.cloudwave.cycletrail.domain.CtTravelMessage;
 import com.cloudwave.cycletrail.service.CtTravelMessageService;
@@ -25,6 +20,12 @@ import com.cloudwave.fwapp.module.domain.User;
 import com.cloudwave.fwapp.module.service.FileEntityService;
 import com.cloudwave.fwapp.web.ResponseEntity;
 
+/**
+ * 
+ * @author DolphinBoy
+ * 2013年8月4日 下午5:57:57
+ * 校验参考: http://www.cnblogs.com/rollenholt/archive/2012/12/27/2836374.html
+ */
 @Controller
 @RequestMapping("/travelmessage")
 public class CtTravleMessageAction extends AbstractAction {
@@ -37,26 +38,35 @@ public class CtTravleMessageAction extends AbstractAction {
 	private FileEntityService fileEntityService;
 	
 	@ResponseBody
-	@RequestMapping(method = RequestMethod.POST,  value="/add")
+	@RequestMapping(method=RequestMethod.POST, value="/add")
+	public ResponseEntity add(@Valid CtTravelMessage tm
+			, BindingResult result) {
+		ResponseEntity re = new ResponseEntity();
+		if (result.hasErrors()) {
+			re.setCode(ResponseEntity.ERROR, "数据绑定错误!");
+			return re;
+		}
+		
+		this.ctTravelMessageService.save(tm);
+		re.setCode(ResponseEntity.SUCCESS);
+		return re;
+	}
+	@ResponseBody
+	@RequestMapping(method = RequestMethod.POST,  value="/upload")
 	public ResponseEntity add(@RequestParam("file") MultipartFile file, 
 			@ModelAttribute("ctTravelMessage") CtTravelMessage tm) {
 		ResponseEntity re = new ResponseEntity();
-		User u = new User();
-		u.setId(1l);
 		
-		tm.setId(1l);
-		tm.setSendTime(new Date());
-		tm.setUser(u);
 		if (file != null) {
 			FileEntity fe = saveFile(file);
 			tm.setPath("/upload/" + fe.getSaveName());
 	        if (fe != null) {
-	            
 	            //保存 fe 到数据库
-//	        	this.fileEntityService.save(fe);
-	        	
+	        	this.fileEntityService.save(fe);
 	        }
+	        tm.setFile(fe);
 		}
+		
         this.ctTravelMessageService.save(tm);
 		re.setCode(ResponseEntity.SAVE_SUCCESS);
 		return re;
