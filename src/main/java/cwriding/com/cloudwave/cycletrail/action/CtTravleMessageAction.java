@@ -4,19 +4,24 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.cloudwave.cycletrail.domain.CtTravelMessage;
 import com.cloudwave.cycletrail.service.CtTravelMessageService;
 import com.cloudwave.fwapp.base.action.AbstractAction;
 import com.cloudwave.fwapp.module.domain.FileEntity;
-import com.cloudwave.fwapp.module.domain.User;
 import com.cloudwave.fwapp.module.service.FileEntityService;
 import com.cloudwave.fwapp.web.ResponseEntity;
 
@@ -39,7 +44,7 @@ public class CtTravleMessageAction extends AbstractAction {
 	
 	@ResponseBody
 	@RequestMapping(method=RequestMethod.POST, value="/add")
-	public ResponseEntity add(@Valid CtTravelMessage tm
+	public ResponseEntity add(CtTravelMessage tm
 			, BindingResult result) {
 		ResponseEntity re = new ResponseEntity();
 		if (result.hasErrors()) {

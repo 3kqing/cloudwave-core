@@ -14,7 +14,7 @@ log4j.appender.RollingFile=org.apache.log4j.DailyRollingFileAppender
 #输出编码
 log4j.appender.daily_rolling_file.Encoding=UTF-8
 #日志级别
-#log4j.appender.daily_rolling_file.Threshold=ERROR
+log4j.appender.daily_rolling_file.Threshold=ERROR
 log4j.appender.RollingFile.File=C:/log/biketravel.log
 #log4j.appender.RollingFile.File=${catalina.base}//logs//jfpt_md.log
 log4j.appender.RollingFile.layout=org.apache.log4j.PatternLayout
