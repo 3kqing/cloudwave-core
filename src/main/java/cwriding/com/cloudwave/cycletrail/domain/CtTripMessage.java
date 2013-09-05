@@ -3,6 +3,8 @@ package com.cloudwave.cycletrail.domain;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.cloudwave.fwapp.base.domain.AbstractDomain;
 import com.cloudwave.fwapp.module.domain.FileEntity;
 import com.cloudwave.fwapp.module.domain.User;
@@ -14,7 +16,7 @@ import com.cloudwave.fwapp.module.domain.User;
  * @date 2013-8-22 上午10:28:23
  * TODO
  */
-public class CtTravelMessage extends AbstractDomain {
+public class CtTripMessage extends AbstractDomain {
 	private static final long serialVersionUID = 1984117769061665519L;
 	
 	private String title;
@@ -22,6 +24,7 @@ public class CtTravelMessage extends AbstractDomain {
 	
 	private String text;
 	
+	@DateTimeFormat(pattern="yyyy-MM-dd hh:mm:ss")
 	private Date sendTime;
 	private long timestamp;  //时间戳
 	 

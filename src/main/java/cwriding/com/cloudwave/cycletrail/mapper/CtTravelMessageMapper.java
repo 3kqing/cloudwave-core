@@ -3,17 +3,17 @@ package com.cloudwave.cycletrail.mapper;
 import java.util.Date;
 import java.util.List;
 
-import com.cloudwave.cycletrail.domain.CtTravelMessage;
+import com.cloudwave.cycletrail.domain.CtTripMessage;
 import com.cloudwave.fwapp.base.dao.Mapper;
 
 public interface CtTravelMessageMapper extends Mapper {
 
-	public CtTravelMessage get(String id);
+	public CtTripMessage get(String id);
 
-	public void insert(CtTravelMessage tm);
+	public void insert(CtTripMessage tm);
 
-	public List<CtTravelMessage> load(int count);
+	public List<CtTripMessage> load(int count);
 
-	public List<CtTravelMessage> load(int count, Date date);
+	public List<CtTripMessage> load(int count, Date date);
 	
 }

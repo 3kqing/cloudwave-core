@@ -13,16 +13,16 @@ import com.cloudwave.fwapp.module.domain.User;
 public class CtDiscuss extends AbstractDomain {
 	private static final long serialVersionUID = -4625028862529199355L;
 	
-	private CtTravelMessage travelMessage;
+	private CtTripMessage travelMessage;
 	private String content;
 	private User user;
 	private Date sendTime;
 	
 	
-	public CtTravelMessage getTravelMessage() {
+	public CtTripMessage getTravelMessage() {
 		return travelMessage;
 	}
-	public void setTravelMessage(CtTravelMessage travelMessage) {
+	public void setTravelMessage(CtTripMessage travelMessage) {
 		this.travelMessage = travelMessage;
 	}
 	public String getContent() {

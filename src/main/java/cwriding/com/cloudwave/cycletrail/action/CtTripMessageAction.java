@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
@@ -18,7 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.cloudwave.cycletrail.domain.CtTravelMessage;
+import com.alibaba.fastjson.JSON;
+import com.cloudwave.cycletrail.domain.CtTripMessage;
 import com.cloudwave.cycletrail.service.CtTravelMessageService;
 import com.cloudwave.fwapp.base.action.AbstractAction;
 import com.cloudwave.fwapp.module.domain.FileEntity;
@@ -32,10 +34,10 @@ import com.cloudwave.fwapp.web.ResponseEntity;
  * 校验参考: http://www.cnblogs.com/rollenholt/archive/2012/12/27/2836374.html
  */
 @Controller
-@RequestMapping("/travelmessage")
-public class CtTravleMessageAction extends AbstractAction {
+@RequestMapping("/tripmsg")
+public class CtTripMessageAction extends AbstractAction {
 	//定义一个全局的记录器，通过LoggerFactory获取
-    private final static Logger logger = LoggerFactory.getLogger(CtTravleMessageAction.class); 
+    private final static Logger logger = LoggerFactory.getLogger(CtTripMessageAction.class); 
     
 	@Resource
 	private CtTravelMessageService ctTravelMessageService;
@@ -44,22 +46,24 @@ public class CtTravleMessageAction extends AbstractAction {
 	
 	@ResponseBody
 	@RequestMapping(method=RequestMethod.POST, value="/add")
-	public ResponseEntity add(CtTravelMessage tm
+	public ResponseEntity add(@Valid CtTripMessage tm
 			, BindingResult result) {
 		ResponseEntity re = new ResponseEntity();
 		if (result.hasErrors()) {
 			re.setCode(ResponseEntity.ERROR, "数据绑定错误!");
 			return re;
 		}
-		
-		this.ctTravelMessageService.save(tm);
+//		this.ctTravelMessageService.save(tm);
+		logger.info(JSON.toJSONString(tm));
+		re.setData(tm);
 		re.setCode(ResponseEntity.SUCCESS);
 		return re;
 	}
+	
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.POST,  value="/upload")
 	public ResponseEntity add(@RequestParam("file") MultipartFile file, 
-			@ModelAttribute("ctTravelMessage") CtTravelMessage tm) {
+			@ModelAttribute("ctTravelMessage") CtTripMessage tm) {
 		ResponseEntity re = new ResponseEntity();
 		
 		if (file != null) {
@@ -82,7 +86,7 @@ public class CtTravleMessageAction extends AbstractAction {
 	public ResponseEntity get(@PathVariable("id") String id) {
 		ResponseEntity re = new ResponseEntity();
 		
-		CtTravelMessage tm = this.ctTravelMessageService.get(id);
+		CtTripMessage tm = this.ctTravelMessageService.get(id);
 		if (tm != null) {
 			re.setData(tm, ResponseEntity.SUCCESS);
 		} else {
@@ -98,7 +102,7 @@ public class CtTravleMessageAction extends AbstractAction {
 		ResponseEntity re = new ResponseEntity();
 		int count = 20;
 		
-		List<CtTravelMessage> tmList = this.ctTravelMessageService.load(count);
+		List<CtTripMessage> tmList = this.ctTravelMessageService.load(count);
 		if (CollectionUtils.isNotEmpty(tmList)) {
 			re.setData(tmList, ResponseEntity.SUCCESS);
 		} else {
@@ -114,7 +118,7 @@ public class CtTravleMessageAction extends AbstractAction {
 			,@PathVariable("time") Date time) {
 		ResponseEntity re = new ResponseEntity();
 		
-		List<CtTravelMessage> tmList = this.ctTravelMessageService.load(count, time);
+		List<CtTripMessage> tmList = this.ctTravelMessageService.load(count, time);
 		if (CollectionUtils.isNotEmpty(tmList)) {
 			re.setData(tmList, ResponseEntity.SUCCESS);
 		} else {
