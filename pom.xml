@@ -12,8 +12,8 @@
 	<!-- 属性 -->
 	<properties>
 		<!-- Generic properties -->
-		<jdk.version>1.7</jdk.version>
-		<java.version>1.7</java.version>
+		<jdk.version>1.6</jdk.version>
+		<java.version>1.6</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
@@ -162,13 +162,6 @@
 			<version>${spring.version}</version>
 		</dependency>
 		 -->
-		
-		<!-- 为简化JMS API的使用而作的简单封装 -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jms</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
 		
 		<dependency>
 			<groupId>junit</groupId>
@@ -331,7 +324,7 @@
 		</dependency>
 		 -->
 		
-		<!-- JMS begin -->
+		<!-- 为简化JMS API的使用而作的简单封装 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jms</artifactId>
@@ -592,19 +585,27 @@
 
 	<!-- 编译配置 -->
 	<build>
-		<finalName>cloudwave</finalName>
+		<!-- 最终的构建名称 -->
+		<finalName>${project.artifactId}-${project.version}</finalName>
+		<!-- 指定构建目标 -->
 		<defaultGoal>compile</defaultGoal>
+		
 		<!-- 指定工作目录 -->
-		<directory>target</directory>
+		<!-- 
+		<directory>${basedir}/target</directory>
+		 -->
 		
 		<!-- 资源目录 -->
 		<sourceDirectory>${basedir}/src/main/java</sourceDirectory>
-		<testSourceDirectory>${basedir}/src/test</testSourceDirectory>
-		<!-- <scriptSourceDirectory>js/scripts</scriptSourceDirectory> -->
+		<testSourceDirectory>${basedir}/src/test/java</testSourceDirectory>
+		<!-- 
+		<scriptSourceDirectory>js/scripts</scriptSourceDirectory>
+		 -->
+		 
 		<!-- 输出目录 -->
+		<!-- 
 		<outputDirectory>${basedir}/target/classes</outputDirectory>
 		<testOutputDirectory>${basedir}/target/test-classes</testOutputDirectory>
-		<!-- 
 		<outputDirectory>${basedir}/src/main/webapp/WEB-INF/classes</outputDirectory>
 		<testOutputDirectory>${basedir}/src/main/webapp/WEB-INF/classes</testOutputDirectory>
 		<outputDirectory>bin</outputDirectory>
@@ -657,8 +658,9 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.1</version>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<showWarnings>true</showWarnings>
 					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
 				<!-- 
@@ -670,6 +672,15 @@
                         </dependency>
                 </dependencies>
 				 -->
+			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.16</version>
+				<configuration>
+					<includes>
+						<include>**/*Tests.java</include>
+					</includes>
+				</configuration>
 			</plugin>
 			<plugin>
 	            <groupId>org.apache.maven.plugins</groupId>
@@ -715,19 +726,11 @@
 					</execution>
 				</executions>
 				<configuration>
+					<warName>${project.artifactId}-${project.version}</warName>
 					<!-- <webappDirectory>${basedir}/webapp</webappDirectory> <warSourceDirectory>${basedir}/webapp</warSourceDirectory> -->
-					<!-- <webResources> <resource> <directory>src/main/webapp</directory> 
+						<!-- <webResources> <resource> <directory>src/main/webapp</directory> 
 						<includes> <include>version.txt</include> </includes> <filtering>true</filtering> 
 						</resource> </webResources> -->
-				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.16</version>
-				<configuration>
-					<includes>
-						<include>**/*Tests.java</include>
-					</includes>
 				</configuration>
 			</plugin>
 			
@@ -781,6 +784,18 @@
 				</descriptors> </configuration> </plugin> -->
 		</plugins>
 	</build>
+	<reporting>
+	    <outputDirectory>${basedir}/target/site</outputDirectory>
+	    <plugins>
+			<plugin>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>2.7</version>
+				<reportSets>
+					<reportSet></reportSet>
+				</reportSets>
+			</plugin>
+	    </plugins>
+	</reporting>
 
 	<!-- More Project Information -->
 	<description>移动服务端框架</description>
