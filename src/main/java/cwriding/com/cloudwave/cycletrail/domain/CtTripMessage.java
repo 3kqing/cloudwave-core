@@ -24,7 +24,7 @@ public class CtTripMessage extends AbstractDomain {
 	
 	private String text;
 	
-	@DateTimeFormat(pattern="yyyy-MM-dd hh:mm:ss")
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date sendTime;
 	private long timestamp;  //时间戳
 	 

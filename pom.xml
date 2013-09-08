@@ -591,9 +591,7 @@
 		<defaultGoal>compile</defaultGoal>
 		
 		<!-- 指定工作目录 -->
-		<!-- 
-		<directory>${basedir}/target</directory>
-		 -->
+		<!-- <directory>${basedir}/target</directory> -->
 		
 		<!-- 资源目录 -->
 		<sourceDirectory>${basedir}/src/main/java</sourceDirectory>
@@ -603,14 +601,13 @@
 		 -->
 		 
 		<!-- 输出目录 -->
-		<!-- 
 		<outputDirectory>${basedir}/target/classes</outputDirectory>
 		<testOutputDirectory>${basedir}/target/test-classes</testOutputDirectory>
+		<!-- 
 		<outputDirectory>${basedir}/src/main/webapp/WEB-INF/classes</outputDirectory>
 		<testOutputDirectory>${basedir}/src/main/webapp/WEB-INF/classes</testOutputDirectory>
-		<outputDirectory>bin</outputDirectory>
-		<testOutputDirectory>bin</testOutputDirectory>
 		 -->
+		
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>

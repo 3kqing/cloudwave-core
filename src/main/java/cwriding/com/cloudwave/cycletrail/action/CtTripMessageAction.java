@@ -1,5 +1,6 @@
 package com.cloudwave.cycletrail.action;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -9,8 +10,11 @@ import javax.validation.Valid;
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSON;
 import com.cloudwave.cycletrail.domain.CtTripMessage;
-import com.cloudwave.cycletrail.service.CtTravelMessageService;
+import com.cloudwave.cycletrail.service.CtTripMessageService;
 import com.cloudwave.fwapp.base.action.AbstractAction;
 import com.cloudwave.fwapp.module.domain.FileEntity;
 import com.cloudwave.fwapp.module.service.FileEntityService;
@@ -40,7 +44,7 @@ public class CtTripMessageAction extends AbstractAction {
     private final static Logger logger = LoggerFactory.getLogger(CtTripMessageAction.class); 
     
 	@Resource
-	private CtTravelMessageService ctTravelMessageService;
+	private CtTripMessageService ctTravelMessageService;
 	@Resource
 	private FileEntityService fileEntityService;
 	
@@ -128,4 +132,14 @@ public class CtTripMessageAction extends AbstractAction {
 		return re;
 	}
 	
+	//数据绑定
+    @InitBinder    
+    public void initBinder(WebDataBinder binder) {  
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");    
+        dateFormat.setLenient(false);    
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));    
+        //CustomDateEditor 可以换成自己定义的编辑器。  
+          
+        //注册一个Date 类型的绑定器 。  
+    } 
 }

@@ -12,8 +12,9 @@
 <body>
 <form action="/travelmessage/add" method="post">
     标题：<input type="text" name="title" /><br/>
-    路径：<input type="text" name="path" /><br/>
     内容：<input type="text" name="text" /><br/>
+    用户：<input type="text" name="user.id" value="3"/><br/>
+    用户：<input type="text" name="sendTime" value="" /><br/>
     <input type="submit" />
 </form>
 </body>
