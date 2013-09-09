@@ -7,6 +7,7 @@ import com.cloudwave.fwapp.module.domain.User;
 public abstract class AbstractDomain extends AbstractEntity {
 	private static final long serialVersionUID = 2312584095541134709L;
 
+	protected String tag;
 	protected Integer order;
 	
 	protected Date createTime; // 对象的创建时间
@@ -16,6 +17,12 @@ public abstract class AbstractDomain extends AbstractEntity {
 	protected Boolean enable; // 该对象的有效标识
 	
 	
+	public String getTag() {
+		return tag;
+	}
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
 	public Integer getOrder() {
 		return order;
 	}

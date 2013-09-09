@@ -1,11 +1,15 @@
 
-use biketrail;
+USE biketrail;
 
-select * from app_user;
+SELECT * FROM app_user;
 
-select * from ct_travle_message;
+SELECT * FROM ct_trip_message;
 
-select id_,name_,email_,password_ 
-from app_user u 
-where u.email_ = '569141948@qq.com' 
-or u.name_ = '569141948@qq.com' 
+SELECT id_,name_,email_,password_ 
+FROM app_user u 
+WHERE u.email_ = '569141948@qq.com' 
+OR u.name_ = '569141948@qq.com' 
+
+DROP TABLE ct_trip_message;
+
+SELECT  id_,text_,path_,sendtime_,receivetime_,user_id     FROM ct_trip_message tm ORDER BY tm.sendtime_ DESC LIMIT 0,15

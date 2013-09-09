@@ -1,53 +1,53 @@
--- 创建数据库
-create database if not exists biketrail default character set utf8;
+-- 鍒涘缓鏁版嵁搴�
+CREATE DATABASE IF NOT EXISTS biketrail DEFAULT CHARACTER SET utf8;
 
-create table if not exists app_user
+CREATE TABLE IF NOT EXISTS app_user
 (
-	id_ bigint(20) primary key auto_increment,
-	name_ varchar(50),
-	email_ varchar(50) not null,
-	password_ varchar(64) not null,
-	createtime_ datetime
+	id_ BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
+	name_ VARCHAR(50),
+	email_ VARCHAR(50) NOT NULL,
+	password_ VARCHAR(64) NOT NULL,
+	createtime_ DATETIME
 );
 
-create table if not exists app_user_sign_info
+CREATE TABLE IF NOT EXISTS app_user_sign_info
 (
-	id_ bigint(20) primary key auto_increment,
-	signtime_ datetime not null,
-	signtype_ TINYINT(1) not null,
-	user_id char(36) not null
-);
-
-
-create table if not exists ct_travel_message
-(
-	id_ bigint(20) primary key auto_increment,
-	title_ varchar(50) not null,
-	text_ varchar(500) not null,
-	path_ varchar(100) not null,
-	sendtime_ datetime not null,
-	travelnotes_id char(36),
-	location_id char(36),
-	file_id char(36),
-	user_id int not null
-);
-
-create table if not exists ct_picture
-(
-	id_ char(36) primary key,
-	title_ varchar(100),
-	desc_ varchar(500),
-	time_ datetime not null,
-	path_ varchar(200) not null,
-	user_id char(36)
+	id_ BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
+	signtime_ DATETIME NOT NULL,
+	signtype_ TINYINT(1) NOT NULL,
+	user_id CHAR(36) NOT NULL
 );
 
 
-create table if not exists ct_text
+CREATE TABLE IF NOT EXISTS ct_trip_message
 (
-	id_ char(36) primary key,
-	content_ varchar(500) not null,
-	time_ datetime not null,
+	id_ BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
+	text_ VARCHAR(500),
+	path_ VARCHAR(100),
+	sendtime_ DATETIME NOT NULL,
+	receivetime_ DATETIME NOT NULL,
+	travelnotes_id BIGINT(36),
+	location_id BIGINT(36),
+	file_id BIGINT(36),
+	user_id INT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS ct_picture
+(
+	id_ CHAR(36) PRIMARY KEY,
+	title_ VARCHAR(100),
+	desc_ VARCHAR(500),
+	time_ DATETIME NOT NULL,
+	path_ VARCHAR(200) NOT NULL,
+	user_id CHAR(36)
+);
+
+
+CREATE TABLE IF NOT EXISTS ct_text
+(
+	id_ CHAR(36) PRIMARY KEY,
+	content_ VARCHAR(500) NOT NULL,
+	time_ DATETIME NOT NULL,
 	user_id int not null
 );
 

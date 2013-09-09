@@ -57,9 +57,15 @@ public class CtTripMessageAction extends AbstractAction {
 			re.setCode(ResponseEntity.ERROR, "数据绑定错误!");
 			return re;
 		}
-//		this.ctTravelMessageService.save(tm);
-		logger.info(JSON.toJSONString(tm));
-		re.setData(tm);
+		tm.setReceiveTime(new Date());
+		try {
+			this.ctTravelMessageService.save(tm);
+		} catch (Exception e) {
+			re.setCode(ResponseEntity.ERROR, "保存数据时产生错误!");
+			logger.error(e.toString());
+			e.printStackTrace();
+		}
+		
 		re.setCode(ResponseEntity.SUCCESS);
 		return re;
 	}

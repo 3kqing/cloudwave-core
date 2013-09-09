@@ -19,12 +19,10 @@ import com.cloudwave.fwapp.module.domain.User;
 public class CtTripMessage extends AbstractDomain {
 	private static final long serialVersionUID = 1984117769061665519L;
 	
-	private String title;
 	private String path;
-	
 	private String text;
 	
-	@DateTimeFormat(pattern="yyyy-MM-dd hh:mm:ss")
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date sendTime;  //发送时间
 	private Date receiveTime;  //接收时间
 	 
@@ -44,12 +42,6 @@ public class CtTripMessage extends AbstractDomain {
 	}
 	public void setFile(FileEntity file) {
 		this.file = file;
-	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
 	}
 	public String getText() {
 		return text;
