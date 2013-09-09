@@ -8,15 +8,6 @@ lib-cov
 *.gz
 
 
-webapp
-target
-pids
-logs
-results
-
-.idea
-.settings
-
 .classpath
 .project
 
@@ -26,5 +17,8 @@ results
 *.jar
 *.war
 *.ear
+
+/.idea
+/.settings
 /build
 /target
