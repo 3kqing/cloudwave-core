@@ -25,8 +25,8 @@ public class CtTripMessage extends AbstractDomain {
 	private String text;
 	
 	@DateTimeFormat(pattern="yyyy-MM-dd hh:mm:ss")
-	private Date sendTime;
-	private long timestamp;  //时间戳
+	private Date sendTime;  //发送时间
+	private Date receiveTime;  //接收时间
 	 
 	private CtTravelNotes travelNotes;
 	private CtLocation location;
@@ -69,11 +69,11 @@ public class CtTripMessage extends AbstractDomain {
 	public void setSendTime(Date sendTime) {
 		this.sendTime = sendTime;
 	}
-	public long getTimestamp() {
-		return timestamp;
+	public Date getReceiveTime() {
+		return receiveTime;
 	}
-	public void setTimestamp(long timestamp) {
-		this.timestamp = timestamp;
+	public void setReceiveTime(Date receiveTime) {
+		this.receiveTime = receiveTime;
 	}
 	public CtTravelNotes getTravelNotes() {
 		return travelNotes;
