@@ -113,6 +113,7 @@ public class CtTripMessageAction extends AbstractAction {
 		int count = 20;
 		
 		List<CtTripMessage> tmList = this.ctTravelMessageService.load(count);
+		
 		if (CollectionUtils.isNotEmpty(tmList)) {
 			re.setData(tmList, ResponseEntity.SUCCESS);
 		} else {

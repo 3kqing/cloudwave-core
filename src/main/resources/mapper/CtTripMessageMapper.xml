@@ -6,7 +6,7 @@
 <mapper namespace="com.cloudwave.cycletrail.mapper.CtTripMessageMapper">
 
 	<!--定义java bean的属性与数据库表的列之间的映射。type="Student"用到了configuration.xml中定义的别名 -->
-	<resultMap id="ct_tripmessage_map" type="CtTripMessage">
+	<resultMap id="ct_tripmsg_mapper" type="CtTripMessage">
 		<!--id映射 -->
 		<id property="id" column="id_" javaType="long" />
 		<!--普通属性映射 -->
@@ -32,15 +32,15 @@
 			values(#{id}, #{text}, #{path}, #{sendTime}, #{receiveTime}, #{user.id})
 	</insert>
 	 -->
-	<sql id="ct_tripmessage_cols">id_,text_,path_,sendtime_,receivetime_,user_id</sql>
-	<select id="get" parameterType="string" resultMap="ct_tripmessage_map">
-		select <include refid="ct_tripmessage_cols"/> 
+	<sql id="ct_tripmsg_cols">id_,text_,path_,sendtime_,receivetime_,user_id</sql>
+	<select id="get" parameterType="string" resultMap="ct_tripmsg_mapper">
+		select <include refid="ct_tripmsg_cols"/> 
 		from ct_trip_message tm 
 		where tm.id_ = #{id}
 	</select>
 
-	<select id="load" parameterType="int" resultType="arraylist">
-		select <include refid="ct_tripmessage_cols"/> 
+	<select id="load" parameterType="int" resultMap="ct_tripmsg_mapper">
+		select <include refid="ct_tripmsg_cols"/> 
 		from ct_trip_message tm order by tm.sendtime_ desc limit 0,#{count}
 	</select>
 </mapper>
