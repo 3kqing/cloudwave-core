@@ -25,11 +25,17 @@ public class CtTripMessage extends AbstractDomain {
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date sendTime;  //发送时间
 	private Date receiveTime;  //接收时间
-	 
+	private String address;  //地址
+	
 	private CtTravelNotes travelNotes;
 	private CtLocation location;
+	
 	private User user;
+	
 	private FileEntity file;
+	
+	// 用于转换请求路径
+	private String url;
 	
 	/** 以下属性用于显示, 而不做持久化 */
 	private String timeAgo;
@@ -37,6 +43,12 @@ public class CtTripMessage extends AbstractDomain {
 	private List<CtDiscuss> disList;
 	
 	
+	public String getPath() {
+		return path;
+	}
+	public void setPath(String path) {
+		this.path = path;
+	}
 	public FileEntity getFile() {
 		return file;
 	}
@@ -49,11 +61,11 @@ public class CtTripMessage extends AbstractDomain {
 	public void setText(String text) {
 		this.text = text;
 	}
-	public String getPath() {
-		return path;
-	}
-	public void setPath(String path) {
-		this.path = path;
+	public String getUrl() {
+		// 根据域名和path来转换路径
+		// 或者切换为CND路径
+		
+		return url;
 	}
 	public Date getSendTime() {
 		return sendTime;
@@ -66,6 +78,12 @@ public class CtTripMessage extends AbstractDomain {
 	}
 	public void setReceiveTime(Date receiveTime) {
 		this.receiveTime = receiveTime;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	public CtTravelNotes getTravelNotes() {
 		return travelNotes;

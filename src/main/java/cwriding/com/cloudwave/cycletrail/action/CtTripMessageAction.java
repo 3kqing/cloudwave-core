@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.alibaba.fastjson.JSON;
 import com.cloudwave.cycletrail.domain.CtTripMessage;
 import com.cloudwave.cycletrail.service.CtTripMessageService;
 import com.cloudwave.fwapp.base.action.AbstractAction;
@@ -49,8 +48,8 @@ public class CtTripMessageAction extends AbstractAction {
 	private FileEntityService fileEntityService;
 	
 	@ResponseBody
-	@RequestMapping(method=RequestMethod.POST, value="/add")
-	public ResponseEntity add(@Valid CtTripMessage tm
+	@RequestMapping(method=RequestMethod.POST, value="/save")
+	public ResponseEntity save(@Valid CtTripMessage tm
 			, BindingResult result) {
 		ResponseEntity re = new ResponseEntity();
 		if (result.hasErrors()) {
@@ -108,11 +107,11 @@ public class CtTripMessageAction extends AbstractAction {
 	
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.GET,  value="/newest")
-	public ResponseEntity loadNewest() {
+	public ResponseEntity loadNewest(@PathVariable("tmid") Long tmId) {
 		ResponseEntity re = new ResponseEntity();
-		int count = 20;
+		int num = 50;
 		
-		List<CtTripMessage> tmList = this.ctTravelMessageService.load(count);
+		List<CtTripMessage> tmList = this.ctTravelMessageService.loadNewer(num, tmId);
 		
 		if (CollectionUtils.isNotEmpty(tmList)) {
 			re.setData(tmList, ResponseEntity.SUCCESS);
@@ -124,12 +123,12 @@ public class CtTripMessageAction extends AbstractAction {
 	}
 	
 	@ResponseBody
-	@RequestMapping(method = RequestMethod.GET,  value="/loadbefore/{count}")
-	public ResponseEntity loadBefore(@PathVariable("count") int count
-			,@PathVariable("time") Date time) {
+	@RequestMapping(method = RequestMethod.GET,  value="/older")
+	public ResponseEntity loadOlder(@PathVariable("tmid") Long tmId) {
 		ResponseEntity re = new ResponseEntity();
+		int num = 50;
 		
-		List<CtTripMessage> tmList = this.ctTravelMessageService.load(count, time);
+		List<CtTripMessage> tmList = this.ctTravelMessageService.loadOrder(num, tmId);
 		if (CollectionUtils.isNotEmpty(tmList)) {
 			re.setData(tmList, ResponseEntity.SUCCESS);
 		} else {

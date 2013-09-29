@@ -39,8 +39,40 @@
 		where tm.id_ = #{id}
 	</select>
 
+	<select id="countNewerById" parameterType="int" resultMap="ct_tripmsg_mapper">
+		select count(tm.id_) from ct_trip_message tm where tm.id_ > #{tmid} order by tm.sendtime_ desc
+	</select>
+	
 	<select id="load" parameterType="int" resultMap="ct_tripmsg_mapper">
 		select <include refid="ct_tripmsg_cols"/> 
 		from ct_trip_message tm order by tm.sendtime_ desc limit 0,#{count}
 	</select>
+	
+	<select id="loadNewer" parameterType="map" resultMap="ct_tripmsg_mapper">
+		select <include refid="ct_tripmsg_cols"/> 
+		from ct_trip_message tm 
+		<where>
+			<if test="tmid != null">
+				where tm.id_ > #{tmid} 
+			</if>
+		</where>
+		<!-- order by tm.sendtime_ desc  -->
+		<if test="num != null">
+			limit 0,#{num}
+		</if>
+	</select>
+	<![CDATA[
+	<select id="loadOlder" parameterType="map" resultMap="ct_tripmsg_mapper">
+		select <include refid="ct_tripmsg_cols"/> 
+		from ct_trip_message tm 
+		<where>
+			<if test="lastid != null">
+				where tm.id_ < #{tmid} 
+			</if>
+		</where>
+		<if test="num != null">
+			limit 0,#{num}
+		</if>
+	</select>
+	]]>
 </mapper>

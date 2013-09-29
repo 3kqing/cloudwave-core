@@ -1,7 +1,9 @@
 package com.cloudwave.cycletrail.service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.cloudwave.cycletrail.domain.CtTripMessage;
 import com.cloudwave.cycletrail.mapper.CtTripMessageMapper;
+import com.cloudwave.cycletrail.utils.StaticsVariable;
 import com.cloudwave.fwapp.base.service.AbstractService;
 
 @Service
@@ -25,11 +28,24 @@ public class CtTripMessageService extends AbstractService {
 		this.ctTravelMessageMapper.insert(tm);
 	}
 
-	public List<CtTripMessage> load(int count) {
-		return this.ctTravelMessageMapper.load(count);
+	public List<CtTripMessage> loadNewer(long num, Long tmId) {
+		long sum = this.ctTravelMessageMapper.countNewerById(tmId);
+		Map<String, Long> params = new HashMap<String, Long>();
+		params.put("tmid", tmId);
+		if (sum > num) {
+			num += StaticsVariable.TM_COUNT_ADD;
+			params.put("num",  num);
+			return this.ctTravelMessageMapper.loadNewer(params);
+		} else {
+			params.put("num", num);
+			return this.ctTravelMessageMapper.loadNewer(params);
+		}
 	}
-	public List<CtTripMessage> load(int count, Date date) {
-		return this.ctTravelMessageMapper.load(count, date);
+	public List<CtTripMessage> loadOrder(long num, Long tmId) {
+		Map<String, Long> params = new HashMap<String, Long>();
+		params.put("tmid", tmId);
+		params.put("num",  num);
+		return this.ctTravelMessageMapper.loadOlder(params);
 	}
 	
 }
