@@ -106,7 +106,7 @@ public class SignAction extends AbstractAction {
 		
 		User u = new User();
 		u.setEmail(email);
-		u.setName(email);  // 用户名默认使用用户邮箱, 用户登录后提示用户修改
+		u.setUsername(email);  // 用户名默认使用用户邮箱, 用户登录后提示用户修改
 		String savepwd = MD5Encrypt.encrypt(password);
 		u.setPassword(savepwd);
 		

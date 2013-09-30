@@ -13,7 +13,7 @@ import com.cloudwave.fwapp.module.domain.FileEntity;
 public abstract class AbstractAction implements BaseAction {
 	
     
-	protected FileEntity saveFile(MultipartFile file) {
+	protected FileEntity saveFile(MultipartFile file) throws IllegalStateException, IOException {
 		if (!file.isEmpty()) {
 			FileEntity fe = new FileEntity();
 			
@@ -22,7 +22,8 @@ public abstract class AbstractAction implements BaseAction {
             
             String fileName = file.getOriginalFilename();
 //            String path = "F:/Temp/";
-            String path = "E:/WorkSpace/EclipseProject/cwfw-core/src/main/webapp/upload";
+            // 这里的命名规则应该是: 用户ID+年+随机文件名
+            String path = "E:/WorkSpace/EclipseProject/cwfw-core/src/main/webapp/upload//";
             String saveName = UUID.randomUUID()
                     + fileName.substring(fileName.lastIndexOf("."));
             String savePath = path + saveName;
@@ -36,15 +37,9 @@ public abstract class AbstractAction implements BaseAction {
             fe.setMd5("");
             
             File newfile = new File(savePath);
-            try {
-				file.transferTo(newfile);
-			} catch (IllegalStateException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+            
+            file.transferTo(newfile);
+            
             return fe;
 		} else {
 			return null;

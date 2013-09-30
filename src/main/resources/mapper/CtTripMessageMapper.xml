@@ -5,7 +5,6 @@
 <!--namespace该是TradeDetailMapper的完整限定名 -->
 <mapper namespace="com.cloudwave.cycletrail.mapper.CtTripMessageMapper">
 
-	<!--定义java bean的属性与数据库表的列之间的映射。type="Student"用到了configuration.xml中定义的别名 -->
 	<resultMap id="ct_tripmsg_mapper" type="CtTripMessage">
 		<!--id映射 -->
 		<id property="id" column="id_" javaType="long" />
@@ -14,8 +13,11 @@
 		<result property="path" column="path_" />
 		<result property="sendTime" column="sendtime_" />
 		<result property="receiveTime" column="receivetime_" />
-		<association property="user" column="user_id" javaType="User" select="get"/>
+		<association property="user" javaType="User" column="user_id" columnPrefix="u_" resultMap="com.cloudwave.fwapp.module.mapper.UserMapper.app_user_map"/>
 	</resultMap>
+
+	<sql id="ct_tripmsg_cols">id_,text_,path_,sendtime_,receivetime_,user_id</sql>
+	<sql id="ct_tripmsg_noid_cols">text_,path_,sendtime_,receivetime_,user_id</sql>
 
 	<insert id="insert" parameterType="CtTripMessage" >
 		insert into
@@ -32,15 +34,15 @@
 			values(#{id}, #{text}, #{path}, #{sendTime}, #{receiveTime}, #{user.id})
 	</insert>
 	 -->
-	<sql id="ct_tripmsg_cols">id_,text_,path_,sendtime_,receivetime_,user_id</sql>
-	<select id="get" parameterType="string" resultMap="ct_tripmsg_mapper">
+	
+	<select id="get" parameterType="_long" resultMap="ct_tripmsg_mapper">
 		select <include refid="ct_tripmsg_cols"/> 
 		from ct_trip_message tm 
 		where tm.id_ = #{id}
 	</select>
 
-	<select id="countNewerById" parameterType="int" resultMap="ct_tripmsg_mapper">
-		select count(tm.id_) from ct_trip_message tm where tm.id_ > #{tmid} order by tm.sendtime_ desc
+	<select id="countNewerById" parameterType="long" resultType="int">
+		select count(tm.id_) from ct_trip_message tm where tm.id_ > #{id}
 	</select>
 	
 	<select id="load" parameterType="int" resultMap="ct_tripmsg_mapper">
@@ -49,30 +51,23 @@
 	</select>
 	
 	<select id="loadNewer" parameterType="map" resultMap="ct_tripmsg_mapper">
-		select <include refid="ct_tripmsg_cols"/> 
-		from ct_trip_message tm 
-		<where>
-			<if test="tmid != null">
-				where tm.id_ > #{tmid} 
-			</if>
-		</where>
-		<!-- order by tm.sendtime_ desc  -->
-		<if test="num != null">
-			limit 0,#{num}
+		select tm.id_,<include refid="ct_tripmsg_noid_cols"/>
+		,u.id_ as u_id_,u.nickname_ as u_nickname_,u.avatar_ as u_avatar_ 
+		from ct_trip_message tm left join app_user u on tm.user_id = u.id_ 
+		where tm.id_ > #{id} 
+		<if test="num!=null">
+			limit 0,${num}
 		</if>
 	</select>
-	<![CDATA[
+	<select id="loadNewest" parameterType="map" resultMap="ct_tripmsg_mapper">
+		select tm.id_,<include refid="ct_tripmsg_noid_cols"/>
+		,u.id_ as u_id_,u.nickname_ as u_nickname_,u.avatar_ as u_avatar_ 
+		from ct_trip_message tm left join app_user u on tm.user_id = u.id_ 
+		order by tm.id_ desc limit 0,${num}
+	</select>
 	<select id="loadOlder" parameterType="map" resultMap="ct_tripmsg_mapper">
 		select <include refid="ct_tripmsg_cols"/> 
-		from ct_trip_message tm 
-		<where>
-			<if test="lastid != null">
-				where tm.id_ < #{tmid} 
-			</if>
-		</where>
-		<if test="num != null">
-			limit 0,#{num}
-		</if>
+		from ct_trip_message tm <![CDATA[where tm.id_ < #{id} ]]> limit 0,${num}
 	</select>
-	]]>
+	
 </mapper>

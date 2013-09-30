@@ -4,24 +4,23 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cloudwave.fwapp.module.mapper.UserMapper">
 
-	<!--定义java bean的属性与数据库表的列之间的映射。type="Student"用到了configuration.xml中定义的别名 -->
 	<resultMap id="app_user_map" type="User">
-		<!--id映射 -->
 		<id property="id" column="id_" javaType="long" />
-		<!--普通属性映射 -->
-		<result property="name" column="name_" />
+		<result property="username" column="username_" />
+		<result property="nickname" column="nickname_" />
 		<result property="email" column="email_" />
 		<result property="password" column="password_" />
+		<result property="avatar" column="avatar_" />
 	</resultMap>
 
 	<insert id="insert" parameterType="User" >
 		insert into
-		app_user(id_, name_, email_, password_)
-		values(#{id}, #{name}, #{email}, #{password})
+		app_user(id_, username_, nickname_, email_, password_, avatar_)
+		values(#{id}, #{username}, #{nickname}, #{email}, #{password}, #{avatar})
 	</insert>
 	
-	<sql id="app_user_cols">id_,name_,email_,password_</sql>
-	<!--与StudentMapper接口中的getById方法对应, 包括 方法名和参数类型. SQL语句中以“#{}”的形式引用参数 -->
+	<sql id="app_user_cols">id_,username_,nickname_,email_,password_,avatar_</sql>
+	
 	<select id="get" parameterType="string" resultMap="app_user_map">
 		select <include refid="app_user_cols"/> 
 		from app_user u 
@@ -38,7 +37,7 @@
 	<select id="getByAccountOrEmail" parameterType="string" resultMap="app_user_map">
 		select <include refid="app_user_cols"/> 
 		from app_user u 
-		where u.email_ = #{email} or u.name_ = #{name}
+		where u.email_ = #{email} or u.username_ = #{username}
 	</select>
 	
 	

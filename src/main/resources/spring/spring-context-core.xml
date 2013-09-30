@@ -51,7 +51,11 @@
     <!--<bean class="org.springside.modules.utils.spring.SpringContextHolder" lazy-init="false" />-->
 
     <!--  数据源配置,使用c3p0数据库连接池 -->
-    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+    <!-- 
+    	去掉 destroy-method="close"
+    	参考: http://csumissu.iteye.com/blog/1079576
+   	-->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <property name="driverClass" value="${jdbc.driverClassName}" />
         <property name="jdbcUrl" value="${jdbc.url}" />
         <property name="user" value="${jdbc.username}" />
@@ -59,6 +63,11 @@
         <property name="minPoolSize" value="1" />
 		<property name="maxPoolSize" value="5" />
 		<property name="maxIdleTime" value="10" />
+		<!-- 
+		<property name="preferredTestQuery">
+			<value>SELECT 1</value>
+		</property>
+		 -->
     </bean>
 
 	<!-- <jdbc:initialize-database data-source="dataSource" ignore-failures="ALL" enabled="#{app.init_database}"> -->
