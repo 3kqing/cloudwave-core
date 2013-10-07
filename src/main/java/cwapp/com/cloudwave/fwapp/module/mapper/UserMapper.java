@@ -35,6 +35,13 @@ public interface UserMapper extends Mapper {
 	 * @return
 	 */
 	public User getByAccountOrEmail(String accountOrEmail);
+
+	/**
+	 * 用过账号查询用户
+	 * @param username
+	 * @return
+	 */
+	public int findByUsername(String username);
 	
 	
 	

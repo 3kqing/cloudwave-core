@@ -39,4 +39,13 @@ public class UserService extends AbstractService {
 			return false;
 		}
 	}
+
+	public boolean checkUsername(String username) {
+		int sum = this.userMapper.findByUsername(username);
+		if (sum > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

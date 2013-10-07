@@ -46,7 +46,7 @@ public class CtTripMessageAction extends AbstractAction {
 	
 	@ResponseBody
 	@RequestMapping(method=RequestMethod.POST, value="/save")
-	public ResponseEntity save(@RequestParam("picture") MultipartFile file
+	public ResponseEntity save(@RequestParam("picture") MultipartFile file, @RequestParam("token") String token
 			, @Valid CtTripMessage tm , BindingResult result) {
 		ResponseEntity re = new ResponseEntity();
 		if (result.hasErrors()) {
