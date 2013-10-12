@@ -7,7 +7,7 @@ import com.cloudwave.fwapp.module.domain.User;
 
 /**
  * 评论  实体类
- * @author wangwl
+ * @author DolphinBoy
  * @date 2013-8-23
  */
 public class CtDiscuss extends AbstractDomain {

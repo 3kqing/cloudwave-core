@@ -30,12 +30,11 @@ public class CtTripMessageService extends AbstractService {
 		int sum = this.ctTravelMessageMapper.countNewerById(id);
 		Map<String, Long> params = new HashMap<String, Long>();
 		params.put("id", id);
+		params.put("num",  num);
 		if (sum > num) {
-			params.put("num",  num);
-			return this.ctTravelMessageMapper.loadNewer(params);
-		} else {
-			return this.ctTravelMessageMapper.loadNewer(params);
+			num = sum;
 		}
+		return this.ctTravelMessageMapper.loadNewer(params);
 	}
 	public List<CtTripMessage> loadOrder(long num, Long id) {
 		Map<String, Long> params = new HashMap<String, Long>();

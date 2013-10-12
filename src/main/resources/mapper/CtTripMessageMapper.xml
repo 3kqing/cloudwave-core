@@ -54,10 +54,7 @@
 		select tm.id_,<include refid="ct_tripmsg_noid_cols"/>
 		,u.id_ as u_id_,u.nickname_ as u_nickname_,u.avatar_ as u_avatar_ 
 		from ct_trip_message tm left join app_user u on tm.user_id = u.id_ 
-		where tm.id_ > #{id} 
-		<if test="num!=null">
-			limit 0,${num}
-		</if>
+		where tm.id_ > #{id} order by tm.id_ desc limit 0,${num}
 	</select>
 	<select id="loadNewest" parameterType="map" resultMap="ct_tripmsg_mapper">
 		select tm.id_,<include refid="ct_tripmsg_noid_cols"/>
@@ -66,8 +63,10 @@
 		order by tm.id_ desc limit 0,${num}
 	</select>
 	<select id="loadOlder" parameterType="map" resultMap="ct_tripmsg_mapper">
-		select <include refid="ct_tripmsg_cols"/> 
-		from ct_trip_message tm <![CDATA[where tm.id_ < #{id} ]]> limit 0,${num}
+		select tm.id_,<include refid="ct_tripmsg_noid_cols"/>
+		,u.id_ as u_id_,u.nickname_ as u_nickname_,u.avatar_ as u_avatar_ 
+		from ct_trip_message tm left join app_user u on tm.user_id = u.id_ 
+		<![CDATA[where tm.id_ < #{id} ]]> order by tm.id_ desc limit 0,${num}
 	</select>
 	
 </mapper>

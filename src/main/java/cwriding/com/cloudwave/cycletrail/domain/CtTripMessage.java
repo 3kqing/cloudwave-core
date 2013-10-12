@@ -39,8 +39,15 @@ public class CtTripMessage extends AbstractDomain {
 	
 	/** 以下属性用于显示, 而不做持久化 */
 	private String timeAgo;
-	private int disSize = 0;
+	
+	private int zan = 0;  //赞的次数
+	private List<User> zanList;  //赞的人
+	
+	private int disSize = 0;  //评论次数
 	private List<CtDiscuss> disList;
+	
+	private int relay = 0;  //转发次数
+	private List<User> relayList;  //转发人
 	
 	
 	public String getPath() {
@@ -121,4 +128,29 @@ public class CtTripMessage extends AbstractDomain {
 	public void setDisList(List<CtDiscuss> disList) {
 		this.disList = disList;
 	}
+	public int getZan() {
+		return zan;
+	}
+	public void setZan(int zan) {
+		this.zan = zan;
+	}
+	public List<User> getZanList() {
+		return zanList;
+	}
+	public void setZanList(List<User> zanList) {
+		this.zanList = zanList;
+	}
+	public int getRelay() {
+		return relay;
+	}
+	public void setRelay(int relay) {
+		this.relay = relay;
+	}
+	public List<User> getRelayList() {
+		return relayList;
+	}
+	public void setRelayList(List<User> relayList) {
+		this.relayList = relayList;
+	}
+	
 }

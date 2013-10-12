@@ -9,7 +9,8 @@ CREATE TABLE IF NOT EXISTS app_user
 	email_ VARCHAR(50),
 	password_ VARCHAR(64) NOT NULL,
 	avatar_ VARCHAR(100),
-	createtime_ DATETIME NOT NULL
+	createtime_ DATETIME NOT NULL,
+	status_ TINYINT NOT NULL DEFAULT 1
 );
 
 CREATE TABLE IF NOT EXISTS app_user_sign_info

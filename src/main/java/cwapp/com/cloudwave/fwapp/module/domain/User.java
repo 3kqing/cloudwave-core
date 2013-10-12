@@ -19,7 +19,7 @@ public class User extends AbstractEntity {
 	private String password;
 	private String email;
 	private String avatar;
-	
+	private int status;
 	
 	public String getUsername() {
 		return username;
@@ -55,6 +55,12 @@ public class User extends AbstractEntity {
 	}
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
 	}
 	
 }

@@ -78,7 +78,7 @@ public class SignAction extends AbstractAction {
 		
 		// 4. 生成token，并返回用户信息
 		
-		
+		u.setPassword(null);  //把密码设置为空,减少密码在网络中的传输
 		re.setData(u);
 		
 		return re;
@@ -155,15 +155,6 @@ public class SignAction extends AbstractAction {
 			re.setResponseMessage(ResponseEntity.WARN, "手机号码貌似有点不对头哦!");
 			return re;
 		}
-	}
-	
-	
-	
-	
-	
-	@RequestMapping(method = RequestMethod.GET,  value="/test")
-	public void test() {
-		boolean existsEmail = this.userService.checkEmail("11");
 	}
 	
 	

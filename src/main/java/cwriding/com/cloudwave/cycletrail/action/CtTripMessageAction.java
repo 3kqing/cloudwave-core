@@ -145,22 +145,27 @@ public class CtTripMessageAction extends AbstractAction {
 		if (CollectionUtils.isNotEmpty(tmList)) {
 			re.setData(tmList, ResponseEntity.SUCCESS);
 		} else {
-			re.setCode(ResponseEntity.WARN, "没有数据!");
+			re.setCode(ResponseEntity.WARN, "木有更多数据啦~");
 		}
 		
 		return re;
 	}
 	
 	@ResponseBody
-	@RequestMapping(method = RequestMethod.GET,  value="/older/{id}")
+	@RequestMapping(method = RequestMethod.GET,  value="/older")
 	public ResponseEntity loadOlder(@RequestParam("id") Long id) {
 		ResponseEntity re = new ResponseEntity();
+		List<CtTripMessage> tmList = null;
+		if (id != null) {
+			tmList = this.ctTravelMessageService.loadOrder(StaticsVariable.ONCE_REQEST_COUNT, id);
+		} else {
+			tmList = this.ctTravelMessageService.loadNewest(StaticsVariable.ONCE_REQEST_COUNT);
+		}
 		
-		List<CtTripMessage> tmList = this.ctTravelMessageService.loadOrder(StaticsVariable.ONCE_REQEST_COUNT, id);
 		if (CollectionUtils.isNotEmpty(tmList)) {
 			re.setData(tmList, ResponseEntity.SUCCESS);
 		} else {
-			re.setCode(ResponseEntity.WARN, "没有数据!");
+			re.setCode(ResponseEntity.WARN, "木有更多数据啦~");
 		}
 		
 		return re;

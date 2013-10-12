@@ -11,6 +11,7 @@
 		<result property="email" column="email_" />
 		<result property="password" column="password_" />
 		<result property="avatar" column="avatar_" />
+		<result property="status" column="status_" />
 	</resultMap>
 
 	<insert id="insert" parameterType="User" >
@@ -19,7 +20,7 @@
 		values(#{id}, #{username}, #{nickname}, #{email}, #{password}, #{avatar})
 	</insert>
 	
-	<sql id="app_user_cols">id_,username_,nickname_,email_,password_,avatar_</sql>
+	<sql id="app_user_cols">id_,username_,nickname_,email_,password_,avatar_,status_</sql>
 	
 	<select id="get" parameterType="string" resultMap="app_user_map">
 		select <include refid="app_user_cols"/> 
