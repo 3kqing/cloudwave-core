@@ -13,17 +13,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cloudwave.cycletrail.domain.CtText;
-import com.cloudwave.cycletrail.service.CtTextService;
+import com.cloudwave.cycletrail.service.TeTextService;
 import com.cloudwave.fwapp.base.action.AbstractAction;
 import com.cloudwave.fwapp.module.domain.User;
 import com.cloudwave.fwapp.web.ResponseEntity;
 
 @Controller
 @RequestMapping("/text")
-public class CtTextAction extends AbstractAction {
+public class TeTextAction extends AbstractAction {
 
 	@Resource
-	private CtTextService ctTextService;
+	private TeTextService ctTextService;
 	
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.POST,  value="/add")

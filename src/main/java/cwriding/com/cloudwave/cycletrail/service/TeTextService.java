@@ -9,7 +9,7 @@ import com.cloudwave.cycletrail.mapper.CtTextMapper;
 import com.cloudwave.fwapp.base.service.AbstractService;
 
 @Service
-public class CtTextService extends AbstractService {
+public class TeTextService extends AbstractService {
 
 	@Resource
 	private CtTextMapper ctTextMapper;

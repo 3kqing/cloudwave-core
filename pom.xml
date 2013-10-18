@@ -572,11 +572,13 @@
 			https://code.google.com/p/kaptcha/
 			作者拒绝受Maven管理, 所以需要在本地版本库添加kaptcha-2.3.2.jar
 		 -->
+		<!-- 没网的时候禁用，这里要解决本地jar包的问题
 		<dependency>
             <groupId>com.google.code.kaptcha</groupId>
             <artifactId>kaptcha</artifactId>
             <version>${kaptcha.version}</version>
         </dependency>
+		 -->
         
         <!-- 
         	生成缩略图工具
@@ -593,11 +595,13 @@
 		        用于解析图片EXIF信息
 		        其中metadata-extractor未受Maven管理
          -->
+        <!-- 
         <dependency>
             <groupId>com.google.code.metadata</groupId>
             <artifactId>metadata-extractor</artifactId>
             <version>2.6.4</version>
         </dependency>
+         -->
         <dependency>
 			<groupId>com.adobe.xmp</groupId>
 			<artifactId>xmpcore</artifactId>
@@ -908,34 +912,17 @@
 
 	<!-- 远程版本库 -->
 	<repositories>
-		<!-- 
-		<repository>
-			<id>springsource-repo</id>
-			<name>SpringSource Repository
-			</name>
-			<url>http://repo.springsource.org/release</url>
-		</repository>
-		<repository>
-			<id>apache.nexus</id>
-			<name>ASF Nexus Staging</name>
-			<url>https://repository.apache.org/content/groups/staging/</url>
-		</repository>
-		<repository>
-			<id>typesafe</id>
-			<name>typesafe</name>
-			<url>http://repo.typesafe.com/typesafe/releases/</url>
-		</repository>
-		 -->
-		<repository>
-			<id>sonatype</id>
-			<name>Sonatype</name>
-			<url>https://oss.sonatype.org/content/groups/public/</url>
-		</repository>
+		
 		<repository>
 	        <id>mvnrepository-repo</id>
 	        <name>mvnrepository-Repository</name>
 	        <url>http://mvnrepository.com</url>
 	    </repository>
+	    <repository>
+			<id>sonatype</id>
+			<name>Sonatype</name>
+			<url>https://oss.sonatype.org/content/groups/public/</url>
+		</repository>
 	    <repository>
 	        <id>fusesource</id>
 	        <name>fusesource-opensource</name>

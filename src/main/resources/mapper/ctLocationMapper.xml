@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloudwave.cycletrail.mapper.CtLocationMapper">
+
+	<resultMap id="ct_location_map" type="CtLocation">
+		<id property="id" column="id_" javaType="long" />
+		<result property="accuracy" column="accuracy_" />
+		<result property="direction" column="direction_" />
+		<result property="latitude" column="latitude_" />
+		<result property="longitude" column="longitude_" />
+		<result property="radius" column="radius_" />
+		<result property="speed" column="speed_" />
+		<result property="time" column="time_" />
+		<result property="satellitesNum" column="satellitesnum_" />
+		
+		<result property="country" column="country_" />
+		<result property="province" column="province_" />
+		<result property="district" column="district_" />
+		<result property="city" column="city_" />
+		<result property="town" column="town_" />
+		<result property="street" column="street_" />
+		<result property="address" column="address_" />
+		
+		<result property="substance" column="substance_" />
+		<result property="amend" column="amend_" />
+		
+	</resultMap>
+
+	<insert id="insert" parameterType="CtLocation" >
+		insert into ct_loaction l (l.accuracy_, l.direction_, l.latitude_, l.longitude_, l.radius_, l.speed_, l.time_
+		, l.satellitesnum_, l.country_, l.province_, l.district_, l.city_, l.town_, l.street_, l.address_, l.substance_, l.amend_) values 
+		(#{accuracy},#{direction},#{latitude},#{longitude},#{radius},#{speed},#{time},#{satellitesNum}
+		,#{country},#{province},#{district},#{city},#{town},#{street},#{address},#{substance},#{amend})
+	</insert>
+	
+	<insert id="insertAll" parameterType="list">
+		insert into ct_at_user au (au.obj_id, au.user_id, au.hasread_) values 
+		<foreach collection="list" item="at" separator=",">
+		(#{at.objId},#{at.userId},0)
+		</foreach>
+	</insert>
+	
+	<sql id="ct_text_cols">id_,obj_id,user_id,hasread_</sql>
+	
+	
+	<select id="get" parameterType="string" resultMap="ct_text_map">
+		select <include refid="ct_text_cols"/> 
+		from ct_text t 
+		where t.id_ = #{id}
+	</select>
+
+
+</mapper>

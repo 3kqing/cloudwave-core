@@ -55,5 +55,34 @@ CREATE TABLE IF NOT EXISTS ct_text
 );
 
 
+CREATE TABLE IF NOT EXISTS ct_at_user
+(
+	id_ BIGINT(20) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+	obj_id BIGINT(20) UNSIGNED NOT NULL,
+	user_id BIGINT(20) UNSIGNED NOT NULL,
+	hasread_ TINYINT NOT NULL DEFAULT 0
+);
 
-
+CREATE TABLE IF NOT EXISTS ct_loaction
+(
+	id_ BIGINT(20) UNSIGNED PRIMARY KEY,
+	accuracy_ float,
+	direction_ float,
+	latitude_ double NOT NULL,
+	longitude_ double NOT NULL,
+	radius_ float,
+	speed_ float,
+	time_ datetime,
+	satellitesnum_ int,
+	
+	country_ varchar(20),
+	province_ varchar(20),
+	district_ varchar(30),
+	city_ varchar(30),
+	town_ varchar(30),
+	street_ varchar(60),
+	address_ varchar(100),
+	
+	substance_ varchar(20),
+	amend_ varchar(20)
+);

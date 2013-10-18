@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cloudwave.cycletrail.domain.CtPicture;
-import com.cloudwave.cycletrail.service.CtPictureService;
+import com.cloudwave.cycletrail.service.TePictureService;
 import com.cloudwave.fwapp.base.action.AbstractAction;
 import com.cloudwave.fwapp.module.domain.FileEntity;
 import com.cloudwave.fwapp.module.service.FileEntityService;
@@ -33,10 +33,10 @@ import com.cloudwave.fwapp.web.ResponseEntity;
 
 @Controller
 @RequestMapping("/picture")
-public class CtPictureAction extends AbstractAction {
+public class TePictureAction extends AbstractAction {
 	
 	@Resource
-	private CtPictureService ctPictureService;
+	private TePictureService ctPictureService;
 	@Resource
 	private FileEntityService fileEntityService;
 	

@@ -13,7 +13,7 @@ import com.cloudwave.cycletrail.mapper.CtTripMessageMapper;
 import com.cloudwave.fwapp.base.service.AbstractService;
 
 @Service
-public class CtTripMessageService extends AbstractService {
+public class TeTravelMessageService extends AbstractService {
 
 	@Resource
 	private CtTripMessageMapper ctTravelMessageMapper;

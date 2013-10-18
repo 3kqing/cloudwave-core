@@ -1,5 +1,9 @@
 package com.cloudwave.fwapp.web;
 
+import org.apache.commons.lang3.StringUtils;
+
+import com.cloudwave.fwapp.base.entity.ResultEntity;
+
 
 /**
  * User: DolphinBoy
@@ -7,10 +11,7 @@ package com.cloudwave.fwapp.web;
  * Time: 下午11:19
  * Response返回实体封装
  */
-public class ResponseEntity implements Response {
-    private String code;
-    private String info;
-    private Object data;
+public class ResponseEntity extends ResultEntity implements Response {
 
     /**
      * 默认返回码为: FAIL 失败
@@ -33,11 +34,6 @@ public class ResponseEntity implements Response {
         this.code = code;
         this.info = info;
         this.data = "";
-    }
-
-
-    public String getCode() {
-        return code;
     }
 
     public void setCode(String code) {
@@ -71,18 +67,6 @@ public class ResponseEntity implements Response {
     	this.code = code;
     	this.info = info;
     }
-    public String getInfo() {
-        return info;
-    }
-
-    public void setInfo(String info) {
-        this.info = info;
-    }
-
-    public Object getData() {
-        return data;
-    }
-
     public void setData(Object data) {
         this.data = data;
         if (data != null) {
@@ -94,4 +78,14 @@ public class ResponseEntity implements Response {
         this.data = data;
         this.code = code;
     }
+	public ResponseEntity parseResult(ResultEntity r) {
+		this.setCode(r.getCode());
+		if (StringUtils.isNotEmpty(r.getInfo())) {
+			this.setInfo(r.getInfo());
+		}
+		if (r.getData() != null) {
+			this.setData(r.getData());
+		}
+		return this;
+	}
 }
