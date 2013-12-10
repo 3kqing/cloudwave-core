@@ -2,8 +2,8 @@ package com.cloudwave.fwapp.module.domain;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.cloudwave.cycletrail.utils.StaticsVariable;
-import com.cloudwave.fwapp.base.domain.AbstractEntity;
+import com.cloudwave.fwapp.base.domain.BaseEntity;
+import com.cloudwave.trailends.utils.StaticsVariable;
 
 /**
  * User: DolphinBoy
@@ -11,7 +11,7 @@ import com.cloudwave.fwapp.base.domain.AbstractEntity;
  * Time: 下午9:56
  * To change this template use File | Settings | File Templates.
  */
-public class User extends AbstractEntity {
+public class User extends BaseEntity {
 	private static final long serialVersionUID = 6540471194357488833L;
 	
 	private String username;

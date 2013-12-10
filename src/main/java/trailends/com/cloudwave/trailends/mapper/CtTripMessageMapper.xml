@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace该是TradeDetailMapper的完整限定名 -->
+<mapper namespace="com.cloudwave.trailends.mapper.CtTripMessageMapper">
+
+	<resultMap id="ct_tripmsg_mapper" type="CtTripMessage">
+		<!--id映射 -->
+		<id property="id" column="id_" javaType="long" />
+		<!--普通属性映射 -->
+		<result property="text" column="text_" />
+		<result property="path" column="path_" />
+		<result property="sendTime" column="sendtime_" />
+		<result property="receiveTime" column="receivetime_" />
+		<association property="user" javaType="User" column="user_id" columnPrefix="u_" resultMap="com.cloudwave.fwapp.module.mapper.UserMapper.app_user_map"/>
+	</resultMap>
+
+	<sql id="ct_tripmsg_cols">id_,text_,path_,sendtime_,receivetime_,user_id</sql>
+	<sql id="ct_tripmsg_noid_cols">text_,path_,sendtime_,receivetime_,user_id</sql>
+
+	<insert id="insert" parameterType="CtTripMessage" >
+		insert into
+		ct_trip_message(text_, path_, sendtime_, receivetime_, user_id)
+		values(#{text}, #{path}, #{sendTime}, #{receiveTime}, #{user.id})
+	</insert>
+	<!-- 
+	<insert id="insert" parameterType="CtTripMessage" >
+		<selectKey keyProperty="id" resultType="string" order="BEFORE">
+			select uuid() as id_
+		</selectKey>
+		insert into
+			ct_travel_message(id_, text_, path_, sendtime_, receivetime_, user_id)
+			values(#{id}, #{text}, #{path}, #{sendTime}, #{receiveTime}, #{user.id})
+	</insert>
+	 -->
+	
+	<select id="get" parameterType="_long" resultMap="ct_tripmsg_mapper">
+		select <include refid="ct_tripmsg_cols"/> 
+		from ct_trip_message tm 
+		where tm.id_ = #{id}
+	</select>
+
+	<select id="countNewerById" parameterType="long" resultType="int">
+		select count(tm.id_) from ct_trip_message tm where tm.id_ > #{id}
+	</select>
+	
+	<select id="load" parameterType="int" resultMap="ct_tripmsg_mapper">
+		select <include refid="ct_tripmsg_cols"/> 
+		from ct_trip_message tm order by tm.sendtime_ desc limit 0,#{count}
+	</select>
+	
+	<select id="loadNewer" parameterType="map" resultMap="ct_tripmsg_mapper">
+		select tm.id_,<include refid="ct_tripmsg_noid_cols"/>
+		,u.id_ as u_id_,u.nickname_ as u_nickname_,u.avatar_ as u_avatar_ 
+		from ct_trip_message tm left join app_user u on tm.user_id = u.id_ 
+		where tm.id_ > #{id} order by tm.id_ desc limit 0,${num}
+	</select>
+	<select id="loadNewest" parameterType="map" resultMap="ct_tripmsg_mapper">
+		select tm.id_,<include refid="ct_tripmsg_noid_cols"/>
+		,u.id_ as u_id_,u.nickname_ as u_nickname_,u.avatar_ as u_avatar_ 
+		from ct_trip_message tm left join app_user u on tm.user_id = u.id_ 
+		order by tm.id_ desc limit 0,${num}
+	</select>
+	<select id="loadOlder" parameterType="map" resultMap="ct_tripmsg_mapper">
+		select tm.id_,<include refid="ct_tripmsg_noid_cols"/>
+		,u.id_ as u_id_,u.nickname_ as u_nickname_,u.avatar_ as u_avatar_ 
+		from ct_trip_message tm left join app_user u on tm.user_id = u.id_ 
+		<![CDATA[where tm.id_ < #{id} ]]> order by tm.id_ desc limit 0,${num}
+	</select>
+	
+</mapper>

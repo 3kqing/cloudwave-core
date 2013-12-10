@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace该是TradeDetailMapper的完整限定名 -->
+<mapper namespace="com.cloudwave.trailends.mapper.CtPictureMapper">
+
+	<!--定义java bean的属性与数据库表的列之间的映射。type="Student"用到了configuration.xml中定义的别名 -->
+	<resultMap id="ct_picture_map" type="CtPicture">
+		<!--id映射 -->
+		<id property="id" column="id_" javaType="string" />
+		<!--普通属性映射 -->
+		<result property="title" column="title_" />
+		<result property="desc" column="desc_" />
+		<result property="path" column="path_" />
+		<result property="sendtime" column="sendtime_" />
+		<!-- <result property="user" column="user_id" /> -->
+	</resultMap>
+
+	<insert id="insert" parameterType="CtPicture" >
+		insert into
+		ct_picture(id_, title_, desc_, path_, time_, user_id)
+		values(#{id}, #{title}, #{desc}, #{path}, #{sendtime}, #{user})
+	</insert>
+	<sql id="ct_picture_cols">id_,title_,desc_,path_,time_,user_id</sql>
+	<select id="get" parameterType="string" resultMap="ct_picture_map">
+		select <include refid="ct_picture_cols"/> 
+		from ct_picture p 
+		where p.id_ = #{id}
+	</select>
+
+
+</mapper>

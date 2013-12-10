@@ -4,12 +4,12 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.cloudwave.fwapp.base.service.AbstractService;
+import com.cloudwave.fwapp.base.service.BaseService;
 import com.cloudwave.fwapp.module.domain.FileEntity;
 import com.cloudwave.fwapp.module.mapper.FileEntityMapper;
 
 @Service
-public class FileEntityService extends AbstractService {
+public class FileEntityService extends BaseService {
 
 	@Resource
 	private FileEntityMapper fileEntityMapper;

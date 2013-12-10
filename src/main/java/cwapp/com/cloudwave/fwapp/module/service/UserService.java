@@ -4,12 +4,12 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.cloudwave.fwapp.base.service.AbstractService;
+import com.cloudwave.fwapp.base.service.BaseService;
 import com.cloudwave.fwapp.module.domain.User;
 import com.cloudwave.fwapp.module.mapper.UserMapper;
 
 @Service
-public class UserService extends AbstractService {
+public class UserService extends BaseService {
 
 	@Resource
 	private UserMapper userMapper;

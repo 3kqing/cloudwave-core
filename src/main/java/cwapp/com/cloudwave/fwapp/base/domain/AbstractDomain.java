@@ -1,9 +1,11 @@
 package com.cloudwave.fwapp.base.domain;
 
 
-public abstract class AbstractDomain extends AbstractEntity {
+public abstract class AbstractDomain extends BaseEntity {
 	private static final long serialVersionUID = 2312584095541134709L;
 
+	
+	
 	protected String tag;
 	protected Integer order;
 	

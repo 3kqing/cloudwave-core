@@ -8,7 +8,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 	
 	<import resource="spring-mvc-view.xml"/>
-	
+	<import resource="spring-mvc-trailends.xml"/>
 	
 	<context:annotation-config />
 
@@ -148,11 +148,6 @@
 
 	<!-- <bean id="jsonConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"> 
 		<property name="supportedMediaTypes" value="application/json" /> </bean> -->
-	<!-- 拦截器 -->
-	<!-- <mvc:interceptors> <bean class="cwcore.com.cloudwave.web.inteceptor.SystemInteceptor" 
-		/> </mvc:interceptors> -->
-	<!--会导致org.springframework.web.servlet.handler.MappedInterceptor not found错误 -->
-
 
 
 	<!-- 对静态资源文件的访问 方案一 （二选一） -->

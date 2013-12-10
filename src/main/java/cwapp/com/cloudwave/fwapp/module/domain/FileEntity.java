@@ -2,9 +2,9 @@ package com.cloudwave.fwapp.module.domain;
 
 import java.util.Date;
 
-import com.cloudwave.fwapp.base.domain.AbstractEntity;
+import com.cloudwave.fwapp.base.domain.BaseEntity;
 
-public class FileEntity extends AbstractEntity {
+public class FileEntity extends BaseEntity {
 	private static final long serialVersionUID = 9165769419257062731L;
 	
 	private String name;

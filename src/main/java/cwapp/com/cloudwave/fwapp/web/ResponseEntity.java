@@ -1,5 +1,8 @@
 package com.cloudwave.fwapp.web;
 
+import org.jboss.netty.handler.codec.http.HttpResponse;
+
+
 
 /**
  * User: DolphinBoy
@@ -8,10 +11,13 @@ package com.cloudwave.fwapp.web;
  * Response返回实体封装
  */
 public class ResponseEntity implements Response {
+	private HttpResponse response;
+	
     private String code;
     private String info;
     private Object data;
 
+    
     /**
      * 默认返回码为: FAIL 失败
      */
@@ -94,4 +100,5 @@ public class ResponseEntity implements Response {
         this.data = data;
         this.code = code;
     }
+    
 }

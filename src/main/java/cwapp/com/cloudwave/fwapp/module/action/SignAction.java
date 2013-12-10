@@ -9,22 +9,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cloudwave.fw.utils.RegexUtils;
-import com.cloudwave.fw.utils.security.AesEncrypt;
-import com.cloudwave.fw.utils.security.MD5Encrypt;
-import com.cloudwave.fwapp.base.action.AbstractAction;
+import com.cloudwave.fwapp.base.action.BaseAction;
 import com.cloudwave.fwapp.module.domain.User;
 import com.cloudwave.fwapp.module.service.UserService;
 import com.cloudwave.fwapp.web.ResponseEntity;
+import com.cloudwave.fwcore.utils.RegexUtils;
+import com.cloudwave.fwcore.utils.security.AesEncrypt;
+import com.cloudwave.fwcore.utils.security.MD5Encrypt;
 
 /**
  * @description 用户登录，注册等
  * @author DolphinBoy
  * @date 2013-10-7
+ * @TODO 
  */
 @Controller
 @RequestMapping("/sign")
-public class SignAction extends AbstractAction {
+public class SignAction extends BaseAction {
 
 	@Resource
 	private UserService userService;

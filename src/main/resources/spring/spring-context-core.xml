@@ -14,7 +14,7 @@
 
     <description>Spring容器配置</description>
 
-	<import resource="classpath:/datasource.xml"/>
+	<!-- <import resource="classpath:/datasource.xml"/> -->
 	
     <!--  定义jdbc配置信息路径   -->
     <!--<context:property-placeholder location="classpath*:/jdbc.properties" />-->
@@ -29,7 +29,6 @@
                 <!-- 标准配置 -->
                 <value>classpath:/application.properties</value>
                 <value>classpath:/jdbc.properties</value>
-                <value>classpath:/log4j.properties</value>
             </list>
         </property>
     </bean>
@@ -54,20 +53,26 @@
     <!-- 
     	去掉 destroy-method="close"
     	参考: http://csumissu.iteye.com/blog/1079576
+    		http://www.cnblogs.com/Lynn-Sea/archive/2013/12/05/3458740.html
    	-->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-        <property name="driverClass" value="${jdbc.driverClassName}" />
+        <property name="driverClass" value="${jdbc.driverClass}" />
         <property name="jdbcUrl" value="${jdbc.url}" />
         <property name="user" value="${jdbc.username}" />
         <property name="password" value="${jdbc.password}" />
-        <property name="minPoolSize" value="1" />
-		<property name="maxPoolSize" value="5" />
-		<property name="maxIdleTime" value="10" />
-		<!-- 
-		<property name="preferredTestQuery">
-			<value>SELECT 1</value>
-		</property>
-		 -->
+        <property name="minPoolSize" value="${jdbc.miniPoolSize}" />
+		<property name="maxPoolSize" value="${jdbc.maxPoolSize}"/>  
+		<property name="initialPoolSize" value="${jdbc.initialPoolSize}"/>
+		<property name="maxIdleTime" value="${jdbc.maxIdleTime}"/>
+		<property name="acquireIncrement" value="${jdbc.acquireIncrement}"/>
+		
+		<property name="acquireRetryAttempts" value="${jdbc.acquireRetryAttempts}"/>
+		<property name="acquireRetryDelay" value="${jdbc.acquireRetryDelay}"/>
+		<property name="testConnectionOnCheckin" value="${jdbc.testConnectionOnCheckin}"/>
+		<property name="automaticTestTable" value="${jdbc.automaticTestTable}"/>
+		<property name="preferredTestQuery" value="${jdbc.validationQuery}" />
+		<property name="idleConnectionTestPeriod" value="${jdbc.idleConnectionTestPeriod}"/>
+		<property name="checkoutTimeout" value="${jdbc.checkoutTimeout}"/>
     </bean>
 
 	<!-- <jdbc:initialize-database data-source="dataSource" ignore-failures="ALL" enabled="#{app.init_database}"> -->
@@ -89,17 +94,26 @@
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
 	 -->
+	 <!-- 在基本的 MyBatis 中,session 工厂可以使用 SqlSessionFactoryBuilder 来创建。
+	 	而在 MyBatis-Spring 中,则使用 SqlSessionFactoryBean 来替代。 -->
  	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
-		<property name="typeAliasesPackage" value="com.cloudwave.fwapp.module.domain;com.cloudwave.cycletrail.domain" />
-		<!-- 显式指定Mapper文件位置 -->
-		<property name="mapperLocations" value="classpath*:/mapper/*Mapper.xml" />
+		<property name="typeAliasesPackage" value="com.cloudwave.fwapp.module.domain;com.cloudwave.trailends.domain" />
+		<!-- mapperLocations：它表示我们的Mapper文件存放的位置，当我们的Mapper文件跟对应的Mapper接口处于同一位置的时候可以不用指定该属性的值。 -->
+		<property name="mapperLocations" value="classpath*:com/cloudwave/**/mapper/*Mapper.xml" />
 	</bean>
+	<!-- SqlSessionTemplate负责管理 MyBatis 的 SqlSession, 调用 MyBatis 的 SQL 方法, 翻译异常。
+	 	SqlSessionTemplate 是线程安全的, 可以被多个 DAO 所共享使用。 -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory" />
+		<constructor-arg index="1" value="BATCH" />
+	</bean>
+
 	<!-- 扫描basePackage下所有以@MyBatisRepository标识的 接口-->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.cloudwave.fwapp.module.mapper;com.cloudwave.cycletrail.mapper" />
-		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+		<property name="basePackage" value="com.cloudwave.fwapp.module.mapper;com.cloudwave.trailends.mapper" />
+		<!-- <property name="sqlSessionFactory" ref="sqlSessionFactory"></property> -->
 	</bean>
 
 

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloudwave.fwapp.module.mapper.UserMapper">
+
+	<resultMap id="app_user_map" type="User">
+		<id property="id" column="id_" javaType="long" />
+		<result property="username" column="username_" />
+		<result property="nickname" column="nickname_" />
+		<result property="email" column="email_" />
+		<result property="password" column="password_" />
+		<result property="avatar" column="avatar_" />
+		<result property="status" column="status_" />
+	</resultMap>
+
+	<insert id="insert" parameterType="User" >
+		insert into
+		app_user(id_, username_, nickname_, email_, password_, avatar_)
+		values(#{id}, #{username}, #{nickname}, #{email}, #{password}, #{avatar})
+	</insert>
+	
+	<sql id="app_user_cols">id_,username_,nickname_,email_,password_,avatar_,status_</sql>
+	
+	<select id="get" parameterType="string" resultMap="app_user_map">
+		select <include refid="app_user_cols"/> 
+		from app_user u 
+		where u.id_ = #{id}
+	</select>
+	
+	
+	<select id="findByEmail" parameterType="string" resultType="_int">
+		select count(u.id_) as count 
+		from app_user u 
+		where u.email_ = #{email}
+	</select>
+	<select id="findByUsername" parameterType="string" resultType="_int">
+		select count(u.id_) as count 
+		from app_user u 
+		where u.username_ = #{username}
+	</select>
+	
+	<select id="getByAccountOrEmail" parameterType="string" resultMap="app_user_map">
+		select <include refid="app_user_cols"/> 
+		from app_user u 
+		where u.email_ = #{email} or u.username_ = #{username}
+	</select>
+	
+	
+	<select id="findGroupByDay" resultType="hashmap">
+		select DATE_FORMAT( tradetime_, '%Y%m%d' ) as date, count(id_) as ids,
+		sum(amount_) as amount, count(user_id) as uids from trade_detail
+		group by date(tradetime_);
+	</select>
+	<select id="findGroupByWeek" resultType="hashmap">
+		select DATE_FORMAT( tradetime_, '%Y%m%d' ) as date, count(id_) as ids,
+		sum(amount_) as amount, count(user_id) as uids from trade_detail
+		group by week(tradetime_);
+	</select>
+	<select id="findGroupByMonth" resultType="hashmap">
+		select DATE_FORMAT( tradetime_, '%Y%m%d' ) as date, count(id_) as ids,
+		sum(amount_) as amount, count(user_id) as uids from trade_detail
+		group by
+		month(tradetime_);
+	</select>
+
+
+</mapper>
