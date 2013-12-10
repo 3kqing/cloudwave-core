@@ -1,6 +1,7 @@
 package com.cloudwave.fwapp.web;
 
-import org.jboss.netty.handler.codec.http.HttpResponse;
+import javax.servlet.http.HttpServletResponse;
+
 
 
 
@@ -11,7 +12,7 @@ import org.jboss.netty.handler.codec.http.HttpResponse;
  * Response返回实体封装
  */
 public class ResponseEntity implements Response {
-	private HttpResponse response;
+	private HttpServletResponse response;
 	
     private String code;
     private String info;
@@ -22,7 +23,7 @@ public class ResponseEntity implements Response {
      * 默认返回码为: FAIL 失败
      */
     public ResponseEntity() {
-        this.code = ResponseEntity.FAIL;
+        this.code = ResponseEntity.FAILURE;
         this.data = "";
     }
     public ResponseEntity(String code) {
@@ -53,7 +54,7 @@ public class ResponseEntity implements Response {
         	this.info = "操作成功!";
         } else if (WARN.equals(code)) {
         	this.info = "警告!";
-        } else if (FAIL.equals(code)) {
+        } else if (FAILURE.equals(code)) {
         	this.info = "操作失败!";
         } else if (ERROR.equals(code)) {
         	this.info = "错误!";

@@ -1,6 +1,5 @@
 package com.cloudwave.fwapp.web;
 
-import com.cloudwave.fwapp.base.entity.Result;
 
 /**
  * User: DolphinBoy
@@ -8,8 +7,14 @@ import com.cloudwave.fwapp.base.entity.Result;
  * Time: 下午11:21
  * To change this template use File | Settings | File Templates.
  */
-public interface Response extends Result {
-    
+public interface Response {
+	public static final String SUCCESS = "success";
+	public static final String WARN = "warn";
+	public static final String FAILURE = "failure";
+	public static final String ERROR = "error";
+	public static final String INFO = "info";
+	public static final String NONE = "none";
+	
     public static final String SAVE_SUCCESS = "save_success";
     public static final String SAVE_FAIL = "save_fail";
     public static final String UPDATE_SUCCESS = "update_success";

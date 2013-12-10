@@ -1,5 +1,7 @@
 package com.cloudwave.fwapp.module.mapper;
 
+import java.util.List;
+
 import com.cloudwave.fwapp.base.dao.Mapper;
 import com.cloudwave.fwapp.module.domain.User;
 

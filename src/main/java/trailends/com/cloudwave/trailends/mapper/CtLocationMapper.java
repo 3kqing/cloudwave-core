@@ -1,7 +1,7 @@
 package com.cloudwave.trailends.mapper;
 
-import com.cloudwave.cycletrail.domain.CtLocation;
 import com.cloudwave.fwapp.base.dao.Mapper;
+import com.cloudwave.trailends.domain.CtLocation;
 
 public interface CtLocationMapper extends Mapper {
 

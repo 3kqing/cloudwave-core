@@ -26,7 +26,7 @@ public class CtTripMessage extends AppDomain {
 	private Date receiveTime;  //接收时间
 	private String address;  //地址
 	
-	private CtTravels travelNotes;
+	private Trip trip;
 	private CtLocation location;
 	
 	private User user;
@@ -92,11 +92,11 @@ public class CtTripMessage extends AppDomain {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public CtTravels getTravelNotes() {
-		return travelNotes;
+	public Trip getTrip() {
+		return trip;
 	}
-	public void setTravelNotes(CtTravels travelNotes) {
-		this.travelNotes = travelNotes;
+	public void setTrip(Trip trip) {
+		this.trip = trip;
 	}
 	public CtLocation getLocation() {
 		return location;
