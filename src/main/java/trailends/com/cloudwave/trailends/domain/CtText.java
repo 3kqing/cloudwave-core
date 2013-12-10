@@ -10,7 +10,7 @@ public class CtText extends AppDomain {
 	private String content;
 	private Date time;
 	
-	private CtTravelNotes travelNotes;
+	private CtTravels travelNotes;
 	private CtLocation location;
 	private User user;
 	
@@ -30,10 +30,10 @@ public class CtText extends AppDomain {
 	public void setTime(Date time) {
 		this.time = time;
 	}
-	public CtTravelNotes getTravelNotes() {
+	public CtTravels getTravelNotes() {
 		return travelNotes;
 	}
-	public void setTravelNotes(CtTravelNotes travelNotes) {
+	public void setTravelNotes(CtTravels travelNotes) {
 		this.travelNotes = travelNotes;
 	}
 	public CtLocation getLocation() {

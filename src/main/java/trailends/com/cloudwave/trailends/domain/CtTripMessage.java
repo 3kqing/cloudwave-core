@@ -26,10 +26,11 @@ public class CtTripMessage extends AppDomain {
 	private Date receiveTime;  //接收时间
 	private String address;  //地址
 	
-	private CtTravelNotes travelNotes;
+	private CtTravels travelNotes;
 	private CtLocation location;
 	
 	private User user;
+	private List<User> atuser;
 	
 	private FileEntity file;
 	
@@ -91,10 +92,10 @@ public class CtTripMessage extends AppDomain {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public CtTravelNotes getTravelNotes() {
+	public CtTravels getTravelNotes() {
 		return travelNotes;
 	}
-	public void setTravelNotes(CtTravelNotes travelNotes) {
+	public void setTravelNotes(CtTravels travelNotes) {
 		this.travelNotes = travelNotes;
 	}
 	public CtLocation getLocation() {
@@ -108,6 +109,12 @@ public class CtTripMessage extends AppDomain {
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	public List<User> getAtuser() {
+		return atuser;
+	}
+	public void setAtuser(List<User> atuser) {
+		this.atuser = atuser;
 	}
 	public String getTimeAgo() {
 		return timeAgo;

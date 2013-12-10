@@ -1,5 +1,7 @@
 package com.cloudwave.fwapp.module.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -47,5 +49,9 @@ public class UserService extends BaseService {
 		} else {
 			return false;
 		}
+	}
+
+	public List<User> findByIds(List<Long> ids) {
+		return this.userMapper.findByIds(ids);
 	}
 }

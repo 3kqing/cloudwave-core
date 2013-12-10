@@ -24,7 +24,7 @@ public class CtPicture extends AppDomain {
 	
 	private Date sendTime;
 	
-	private CtTravelNotes travelNotes;
+	private CtTravels travelNotes;
 	private CtLocation location;
 	private User user;
 	
@@ -61,10 +61,10 @@ public class CtPicture extends AppDomain {
 	public void setSendTime(Date sendTime) {
 		this.sendTime = sendTime;
 	}
-	public CtTravelNotes getTravelNotes() {
+	public CtTravels getTravelNotes() {
 		return travelNotes;
 	}
-	public void setTravelNotes(CtTravelNotes travelNotes) {
+	public void setTravelNotes(CtTravels travelNotes) {
 		this.travelNotes = travelNotes;
 	}
 	public CtLocation getLocation() {

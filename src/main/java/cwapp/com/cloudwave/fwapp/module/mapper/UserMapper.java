@@ -40,6 +40,8 @@ public interface UserMapper extends Mapper {
 	 * @return
 	 */
 	public int findByUsername(String username);
+
+	public List<User> findByIds(List<Long> ids);
 	
 	
 	
